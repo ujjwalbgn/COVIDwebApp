@@ -135,8 +135,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "COVIDwebApp/static"),
-    'static',
+    os.path.join(BASE_DIR, "COVIDwebApp/../healthcare/templates/static"),
+    'healthcare/templates/static',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
