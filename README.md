@@ -1,7 +1,7 @@
 ## COVIDwebApp 
 This is CSE3310 UTA project
 
-#### Before you start writing code : ALAWAYS do ``` git pull  ```<br />
+#### Before you start writing code : ALwAYS do ``` git pull  ```<br />
 
 If you are wokring on a new feature or adding something new do switch to a different branch:  <br />
     command to create a different branch : ``` git branch BRANCHNAME``` <br />
