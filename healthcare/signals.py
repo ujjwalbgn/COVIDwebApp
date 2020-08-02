@@ -13,6 +13,8 @@ def customer_profile(sender, instance, created, **kwargs):
 
         Patient.objects.create(
             user=instance,
+            firstName=instance.first_name,
+            lastName=instance.last_name,
         )
         print('Profile created!')
 
