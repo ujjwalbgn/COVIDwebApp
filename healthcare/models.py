@@ -15,4 +15,9 @@ class Patient(models.Model):
     #todo add patients medical history
 
     def __str__(self):
-        return self.firstName + ' ' + self.lastName
+        if (self.firstName and self.lastName):
+            display = (self.firstName + " " + self.lastName)
+        else:
+            display = str(self.date_created)
+
+        return display
