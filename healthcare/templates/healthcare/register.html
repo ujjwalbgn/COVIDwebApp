@@ -1,0 +1,39 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    <div class="form-screen">
+        <div class="card account-dialog">
+            <div class="card-header bg-primary text-white"> Register </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                    </div>
+                <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password1" placeholder="Password">
+                    </div>
+                <div class="form-group">
+                        <input type="password" class="form-control" name="password2" placeholder="Password">
+                </div>
+                    <div class="account-dialog-actions">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <a class="account-dialog-link" href="{% url 'login' %}">Already have an account?</a>
+                    </div>
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                        <p>
+                            {{ form.errors }}
+                        </p>
+                        </div>
+                        {% endif %}
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
