@@ -66,7 +66,8 @@ def home(request):
         try:
             patient = Patient.objects.get(user = current_user)
         except ObjectDoesNotExist:
-            print("Current User doesnot have pateint class ")
+            messages.info(request, 'Sign in as Patient')
+            return redirect('logout')
 
         context = {'user': current_user, 'patient': patient}
     else:
@@ -88,3 +89,21 @@ def editPateint(request,pk):
             return redirect('/')
 
     return render(request, 'healthcare/patientForm.html', context)
+
+
+def testLocation(request):
+   testLocations = TestLocation.objects.all()
+
+   if request.user.is_authenticated:
+       current_user = request.user
+       patient = Patient.objects.get(user=current_user)
+       context = {'testLocations': testLocations, 'patient': patient}
+   else:
+        context = {'testLocations': testLocations}
+
+
+   return render(request, 'healthcare/testLocationForm.html', context)
+
+
+
+
