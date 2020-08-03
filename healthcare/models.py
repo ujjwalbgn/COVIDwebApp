@@ -32,7 +32,7 @@ class Patient(models.Model):
 
         return display
 
-class testLocation(models.Model):
+class TestLocation(models.Model):
     name = models.CharField(max_length=200, null=False)
     address = models.CharField(max_length=500, null=True)
     phone_number = models.CharField(max_length= 200, null= True)
