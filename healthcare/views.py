@@ -12,6 +12,12 @@ from django.contrib.auth.models import Group, User
 
 from .models import Patient
 from .forms import *
+
+from .forms import testLocationForm
+from .models import testLocation
+
+
+
 # Create your views here.
 
 def registerPage(request):
@@ -69,5 +75,8 @@ def editPateint(request,pk):
         if form.is_valid():
             form.save()
             return redirect('/')
-
     return render(request, 'healthcare/patientForm.html', context)
+
+def testLocation_view(request):
+    context ={}
+    return render(request, "healthcare/testLocation_view.html", context)
