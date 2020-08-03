@@ -8,6 +8,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
 
+from django.core.exceptions import ObjectDoesNotExist
+
 
 
 from .models import Patient
@@ -58,12 +60,26 @@ def logoutUser(request):
     return redirect('login')
 
 def home(request):
-    return render(request, 'healthcare/home.html')
+    if request.user.is_authenticated:
+        current_user = request.user
+
+        try:
+            patient = Patient.objects.get(user = current_user)
+        except ObjectDoesNotExist:
+            print("Current User doesnot have pateint class ")
+
+        context = {'user': current_user, 'patient': patient}
+    else:
+        context= {}
+    return render(request, 'healthcare/home.html', context )
+
+
+
 
 def editPateint(request,pk):
     patient = Patient.objects.get(id = pk)
     form = PatientForm(instance = patient)
-    context = {'form': form, 'pateint': patient}
+    context = {'form': form, 'patient': patient}
 
     if request.method == 'POST':
         form = PatientForm(request.POST, instance=patient)
