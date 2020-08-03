@@ -4,6 +4,8 @@ from django.db import models
 
 # Create your models here.
 class Patient(models.Model):
+    GENDER_CHOICES = [('M', 'Male'), ('F', 'Female'), ('O', 'Other'),('NA', 'I do not wish to say')]
+
     user = models.OneToOneField(User, null=True,blank=True, on_delete=models.CASCADE)
     first_Name = models.CharField(max_length= 200, null= True)
     last_Name = models.CharField(max_length= 200, null= True)
@@ -11,9 +13,9 @@ class Patient(models.Model):
     email = models.CharField(max_length=200, null= True)
     date_created = models.DateField(auto_now_add = True)
 
-    birth_date = models.CharField(max_length=10, null=True)
+    birth_date = models.DateTimeField(blank= True)
     age = models.DecimalField(decimal_places=0, max_digits=50, null=True)
-    gender = models.CharField(max_length=10, default='')
+    gender = models.CharField(max_length=2, choices=GENDER_CHOICES, blank= True)
     height = models.CharField(max_length=10, default='0.00 ft')
     weight = models.CharField(max_length=10, default='0.00 lbs')
     allergies = models.CharField(max_length=200, null=True)
