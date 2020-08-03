@@ -3,7 +3,7 @@
         <div class="card card-body">
             <form method="post" action="">
                 {% csrf_token %}
-                {{form}}
+                {{form.as_ul}}
                 <input type="submit" name = "Submit">
             </form>
         </div>
