@@ -12,6 +12,7 @@ from django.contrib.auth.models import Group, User
 
 from .models import Patient
 from .forms import *
+
 # Create your views here.
 
 def registerPage(request):
@@ -62,7 +63,7 @@ def home(request):
 def editPateint(request,pk):
     patient = Patient.objects.get(id = pk)
     form = PatientForm(instance = patient)
-    context = {'form': form}
+    context = {'form': form, 'pateint': patient}
 
     if request.method == 'POST':
         form = PatientForm(request.POST, instance=patient)

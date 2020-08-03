@@ -1,11 +1,45 @@
-<div class="row">
-    <div class="col-md-6">
-        <div class="card card-body">
-            <form method="post" action="">
-                {% csrf_token %}
-                {{form.as_ul}}
-                <input type="submit" name = "Submit">
-            </form>
+
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Forms</h1>
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="spur-card-title"> Patient Form </div>
+                        </div>
+                        <div class="card-body ">
+
+                            {#  Use this is template and make changes with in the form tags#}
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                {%  for field  in form %}
+                                    <div class="form-group row">
+                                        <label name="{{field.label }}" class="col-sm-2 col-form-label">{{ field.label }}</label>
+                                        <div class="col-sm-9">
+                                            {{ field |addclass:'form-control' }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a  class="btn btn-outline-danger" href="{% url 'editPateint' pateint.id %}">Cancel</a>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </main>
+
+{% endblock %}
