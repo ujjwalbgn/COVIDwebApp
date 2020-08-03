@@ -10,5 +10,5 @@ urlpatterns = [
 
 
     path('', views.home, name="home"),
-    path('edit_pateint/<str:pk>/', views.editPateint, name="editPateint"),
+    path('edit_patient/<int:pk>/', views.editPateint, name="editPatient"),
 ]
