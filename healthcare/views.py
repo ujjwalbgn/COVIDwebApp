@@ -12,7 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 
-from .models import Patient
+from .models import *
 from .forms import *
 
 # Create your views here.
