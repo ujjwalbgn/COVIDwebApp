@@ -5,8 +5,8 @@ from django.db import models
 # Create your models here.
 class Patient(models.Model):
     user = models.OneToOneField(User, null=True,blank=True, on_delete=models.CASCADE)
-    firstName = models.CharField(max_length= 200, null= True)
-    lastName = models.CharField(max_length= 200, null= True)
+    first_Name = models.CharField(max_length= 200, null= True)
+    last_Name = models.CharField(max_length= 200, null= True)
     phone = models.CharField(max_length= 200, null= True)
     email = models.CharField(max_length=200, null= True)
     date_created = models.DateField(auto_now_add = True)
@@ -23,8 +23,8 @@ class Patient(models.Model):
     insurance_provider = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        if (self.firstName and self.lastName):
-            display = (self.firstName + " " + self.lastName)
+        if (self.first_Name and self.last_Name):
+            display = (self.first_Name + " " + self.last_Name)
         else:
             display = str(self.date_created)
 
