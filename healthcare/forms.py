@@ -3,13 +3,18 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 
 from .models import Patient
+from django import forms
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class PatientForm(ModelForm):
     class Meta:
         model = Patient
         fields = '__all__'
         exclude= ['user']
+        widgets = {'birth_date' : DateInput}
+
 
 
 class CreateUserForm(UserCreationForm):
