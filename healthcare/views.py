@@ -60,7 +60,7 @@ def home(request):
     return render(request, 'healthcare/home.html')
 
 def editPateint(request,pk):
-    patient = Patient.objects.get(pk)
+    patient = Patient.objects.get(id = pk)
     form = PatientForm(instance = patient)
     context = {'form': form}
 
