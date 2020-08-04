@@ -3,27 +3,36 @@
 {% block content %}
     <div class="form-screen">
         <div class="card account-dialog">
-            <div class="card-header bg-primary text-white"> Please sign in </div>
+            <div class="card-header bg-primary text-white"><center> SIGN IN </center></div>
             <div class="card-body">
                 <form method="POST" action="">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                        <input type="text" class="form-control" name="username" placeholder=" Username">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
-                    <div class="account-dialog-actions">
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                        <a class="account-dialog-link" href="{% url 'register' %}">Create a new account</a>
+
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">Sign in </button><br> </br>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <a href="{% url 'register' %}" class="ml-2">New User? Register </a>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <a href="{% url 'reset_password' %}" class="ml-2"> Forgot Password? </a>
                     </div>
 
                     {% for message in messages %}
                         <div class="alert alert-danger">
-                        <p id="messages">
-                            {{ message }}
-                        </p>
+                            <p id="messages">
+                                {{ message }}
+                            </p>
                         </div>
+
                     {% endfor %}
 
                 </form>
