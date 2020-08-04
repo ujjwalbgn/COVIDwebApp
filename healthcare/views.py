@@ -1,5 +1,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+
 
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
@@ -14,6 +16,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .models import *
 from .forms import *
+
 
 # Create your views here.
 
@@ -50,7 +53,7 @@ def loginPage(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.info(request,'Username or Password is incorrect')
+                messages.warning(request,'Username or Password is incorrect')
 
     content= {}
     return render(request, 'healthcare/login.html', content)
@@ -62,22 +65,23 @@ def logoutUser(request):
 def home(request):
     if request.user.is_authenticated:
         current_user = request.user
-
         try:
             patient = Patient.objects.get(user = current_user)
         except ObjectDoesNotExist:
-            messages.info(request, 'Sign in as Patient')
-            return redirect('logout')
+            patient = None
 
         context = {'user': current_user, 'patient': patient}
     else:
         context= {}
     return render(request, 'healthcare/home.html', context )
 
+def listPatient(request):
+    patients = Patient.objects.all()
+    context = {'patients': patients}
 
+    return render(request, 'healthcare\listPateint.html', context)
 
-
-def editPateint(request,pk):
+def editPatient(request,pk):
     patient = Patient.objects.get(id = pk)
     form = PatientForm(instance = patient)
     context = {'form': form, 'patient': patient}
@@ -86,7 +90,7 @@ def editPateint(request,pk):
         form = PatientForm(request.POST, instance=patient)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return HttpResponseRedirect(request.path_info)
 
     return render(request, 'healthcare/patientForm.html', context)
 
@@ -95,7 +99,11 @@ def testLocation(request):
     testLocations = TestLocation.objects.all()
 
     if request.user.is_authenticated:
-        patient = Patient.objects.get(user=request.user)
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            patient = None
         context = {'testLocations': testLocations, 'patient': patient}
     else:
         context = {'testLocations': testLocations}
@@ -112,7 +120,7 @@ def covidScreening(request):
         form = CovidScreeningForm(request.POST)
         if form.is_valid():
 
-
+            # todo save to existing patient
 
             closeContactWithCovid19Patient = form.cleaned_data['have_you_been_in_contact_with_COVID19_patient_or_one_who_had_close_contact_with_Covid19_patient']
             counter = 0
@@ -129,13 +137,41 @@ def covidScreening(request):
 
 
     if request.user.is_authenticated:
-        patient = Patient.objects.get(user=request.user)
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            # print("Unable to find patient ID")
+            patient = None
         context = {'form': form, 'patient': patient}
     else:
         context = {'form': form}
     return render(request, 'healthcare/covidScreening.html', context)
 
 
+def editMedication(request):
+    form = MedicationForm()
+    medications = Medication.objects.all()
 
+    if request.method == 'POST':
+        form = MedicationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('medication')
 
+    context = {'form': form, 'medications': medications}
+    return render(request, 'healthcare/editMedication.html', context)
+
+def editTreatement(request):
+    form = TreatmentForm()
+    treatments = Treatment.objects.all()
+
+    if request.method == 'POST':
+        form = TreatmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('treatment')
+
+    context = {'form': form, 'treatments': treatments}
+    return render(request, 'healthcare/editTreatment.htm', context)
 

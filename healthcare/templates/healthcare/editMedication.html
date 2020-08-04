@@ -6,7 +6,7 @@
 
     <main class="dash-content">
         <div class="container-fluid">
-            <h1 class="dash-title">Forms</h1>
+            <h1 class="dash-title">Medications</h1>
             <div class="row">
                 <div class="col-xl-10">
                     <div class="card spur-card">
@@ -14,7 +14,7 @@
                             <div class="spur-card-icon">
                                 <i class="fas fa-chart-bar"></i>
                             </div>
-                            <div class="spur-card-title"> Patient Form </div>
+                            <div class="spur-card-title"> Add Medication Form </div>
                         </div>
                         <div class="card-body ">
 
@@ -23,7 +23,7 @@
                                 {% csrf_token %}
                                 {%  for field  in form %}
                                     <div class="form-group row">
-                                        <label  class="col-sm-2 col-form-label">{{ field.label }}</label>
+                                        <label class="col-sm-2 col-form-label">{{ field.label }}</label>
                                         <div class="col-sm-9">
                                             {{ field |addclass:'form-control' }}
                                         </div>
@@ -32,10 +32,38 @@
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a  class="btn btn-outline-danger" href="{% url 'editPatient' patient.id %}">Cancel</a>
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">List of Existing Medication</div>
+                        </div>
+                        <div class="card-body ">
+                            <table class="table table-hover table-in-card">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for medication in medications %}
+                                    <tr>
+                                        <th scope="row"> {{ forloop.counter }}</th>
+                                        <td>{{ medication.name }}</td>
+                                        <td>
+                                            {{ medication.description }}
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

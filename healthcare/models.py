@@ -11,9 +11,10 @@ class Patient(models.Model):
     last_Name = models.CharField(max_length= 200, null= True)
     phone = models.CharField(max_length= 200, null= True)
     email = models.CharField(max_length=200, null= True)
+    address = models.CharField(max_length=500, null= True)
     date_created = models.DateField(auto_now_add = True)
 
-    birth_date = models.DateTimeField(blank= True)
+    birth_date = models.DateTimeField(blank= True, null= True)
     age = models.DecimalField(decimal_places=0, max_digits=50, null=True)
     gender = models.CharField(max_length=2, choices=GENDER_CHOICES, blank= True)
     height = models.CharField(max_length=10, default='0.00 ft')
@@ -44,7 +45,6 @@ class TestLocation(models.Model):
 
 
 class CovidScreening(models.Model):
-
     BOOL_CHOICES = [('Y', 'Yes'), ('N', 'No')]
     OPT_CHOICES = [('Y', 'Yes'), ('N', 'No'),('NA', 'I do not know')]
 
@@ -65,3 +65,18 @@ class CovidScreening(models.Model):
         else:
             display = str(self.id)
         return display
+
+
+class Medication(models.Model):
+    name =  models.CharField(max_length= 200, null= True)
+    description =  models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Treatment(models.Model):
+    name = models.CharField(max_length= 200, null= True)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name

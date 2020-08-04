@@ -28,3 +28,13 @@ class CovidScreeningForm(ModelForm):
         model = CovidScreening
         fields = '__all__'
         exclude = ['patient']
+
+class MedicationForm(ModelForm):
+    class Meta:
+        model = Medication
+        fields = '__all__'
+
+class TreatmentForm(ModelForm):
+    class Meta:
+        model = Treatment
+        fields = '__all__'
