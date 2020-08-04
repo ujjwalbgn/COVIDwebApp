@@ -12,5 +12,6 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('edit_patient/<int:pk>/', views.editPateint, name="editPatient"),
     path('testlocation/', views.testLocation, name="testLocation"),
+    path('covidscreening/', views.covidScreening, name="covidScreening"),
 
 ]
