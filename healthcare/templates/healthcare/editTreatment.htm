@@ -6,7 +6,7 @@
 
     <main class="dash-content">
         <div class="container-fluid">
-            <h1 class="dash-title">Medications</h1>
+            <h1 class="dash-title">Treatments</h1>
             <div class="row">
                 <div class="col-xl-10">
                     <div class="card spur-card">
@@ -14,7 +14,7 @@
                             <div class="spur-card-icon">
                                 <i class="fas fa-chart-bar"></i>
                             </div>
-                            <div class="spur-card-title"> Add Medication Form </div>
+                            <div class="spur-card-title"> Add treatment Form </div>
                         </div>
                         <div class="card-body ">
 
@@ -39,7 +39,7 @@
                     </div>
                 <div class="card spur-card">
                         <div class="card-header">
-                            <div class="spur-card-title">List of Existing Medication</div>
+                            <div class="spur-card-title">List of Existing treatment</div>
                         </div>
                         <div class="card-body ">
                             <table class="table table-hover table-in-card">
@@ -52,14 +52,13 @@
                                 </thead>
                                 <tbody>
 
-                                {% for medication in medications %}
+                                {% for treatment in treatments %}
                                     <tr>
                                         <th scope="row"> {{ forloop.counter }}</th>
-                                        <td>{{ medication.name }}</td>
+                                        <td>{{ treatment.name }}</td>
                                         <td>
-                                            {{ medication.description }}
+                                            {{ treatment.description }}
                                         </td>
-
                                     </tr>
                                 {% endfor %}
                                 </tbody>

@@ -1,0 +1,52 @@
+
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">All Patients</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">List of Pateints</div>
+                        </div>
+                        <div class="card-body ">
+                            <table class="table table-hover table-in-card">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">More</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for patient in patients %}
+                                    <tr>
+                                        <th scope="row"> {{ forloop.counter }}</th>
+                                        <td>{{ patient }}</td>
+                                        <td>
+                                            {{ patient.age }}
+                                        </td>
+                                        <td>
+                                            {{ patient.gender }}
+                                        </td>
+                                        <td>
+                                            <a href=" {% url 'editPatient' patient.id %}" {{ patient.gender }}>View/Edit</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
