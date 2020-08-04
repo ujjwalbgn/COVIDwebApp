@@ -23,3 +23,8 @@ class CreateUserForm(UserCreationForm):
         fields = ['first_name','last_name','username', 'email','password1','password2']
 
 
+class CovidScreeningForm(ModelForm):
+    class Meta:
+        model = CovidScreening
+        fields = '__all__'
+        exclude = ['patient']
