@@ -79,7 +79,7 @@ def listPatient(request):
     patients = Patient.objects.all()
     context = {'patients': patients}
 
-    return render(request, 'healthcare\listPateint.html', context)
+    return render(request, 'healthcare\listPatient.html', context)
 
 def editPatient(request,pk):
     patient = Patient.objects.get(id = pk)
