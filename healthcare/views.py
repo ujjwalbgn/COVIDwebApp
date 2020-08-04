@@ -92,17 +92,39 @@ def editPateint(request,pk):
 
 
 def testLocation(request):
-   testLocations = TestLocation.objects.all()
+    testLocations = TestLocation.objects.all()
 
-   if request.user.is_authenticated:
-       current_user = request.user
-       patient = Patient.objects.get(user=current_user)
-       context = {'testLocations': testLocations, 'patient': patient}
-   else:
+    if request.user.is_authenticated:
+        patient = Patient.objects.get(user=request.user)
+        context = {'testLocations': testLocations, 'patient': patient}
+    else:
         context = {'testLocations': testLocations}
 
 
-   return render(request, 'healthcare/testLocationForm.html', context)
+    return render(request, 'healthcare/testLocationForm.html', context)
+
+
+
+def covidScreening(request):
+
+    form = CovidScreeningForm()
+    if request.method == 'POST':
+        form = CovidScreeningForm(request.POST)
+        if form.is_valid():
+
+            closeContactWithCovid19Patient = form.cleaned_data['have_you_been_in_contact_with_COVID19_patient_or_one_who_had_close_contact_with_Covid19_patient']
+            if (closeContactWithCovid19Patient == 'Y'):
+                messages.info(request, 'According to the data you provided, we recommend COVID testing')
+                return redirect('testLocation')
+
+
+    if request.user.is_authenticated:
+        patient = Patient.objects.get(user=request.user)
+        context = {'form': form, 'patient': patient}
+    else:
+        context = {'form': form}
+    return render(request, 'healthcare/covidScreening.html', context)
+
 
 
 
