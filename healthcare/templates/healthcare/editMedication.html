@@ -14,7 +14,7 @@
                             <div class="spur-card-icon">
                                 <i class="fas fa-chart-bar"></i>
                             </div>
-                            <div class="spur-card-title"> Patient Form </div>
+                            <div class="spur-card-title"> Add Medication Form </div>
                         </div>
                         <div class="card-body ">
 
@@ -23,7 +23,7 @@
                                 {% csrf_token %}
                                 {%  for field  in form %}
                                     <div class="form-group row">
-                                        <label  class="col-sm-2 col-form-label">{{ field.label }}</label>
+                                        <label class="col-sm-2 col-form-label">{{ field.label }}</label>
                                         <div class="col-sm-9">
                                             {{ field |addclass:'form-control' }}
                                         </div>
@@ -32,7 +32,6 @@
                                 <div class="form-group row">
                                     <div class="col-sm-9">
                                         <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a  class="btn btn-outline-danger" href="{% url 'editPatient' patient.id %}">Cancel</a>
                                     </div>
                                 </div>
                             </form>
