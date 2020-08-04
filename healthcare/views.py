@@ -1,5 +1,7 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+
 
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
@@ -73,10 +75,13 @@ def home(request):
         context= {}
     return render(request, 'healthcare/home.html', context )
 
+def listPatient(request):
+    patients = Patient.objects.all()
+    context = {'patients': patients}
 
+    return render(request, 'healthcare\listPateint.html', context)
 
-
-def editPateint(request,pk):
+def editPatient(request,pk):
     patient = Patient.objects.get(id = pk)
     form = PatientForm(instance = patient)
     context = {'form': form, 'patient': patient}
@@ -85,7 +90,7 @@ def editPateint(request,pk):
         form = PatientForm(request.POST, instance=patient)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return HttpResponseRedirect(request.path_info)
 
     return render(request, 'healthcare/patientForm.html', context)
 
@@ -146,14 +151,27 @@ def covidScreening(request):
 
 def editMedication(request):
     form = MedicationForm()
-    context = {'form': form}
+    medications = Medication.objects.all()
+
     if request.method == 'POST':
-        form = CovidScreeningForm(request.POST)
+        form = MedicationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('medication')
 
+    context = {'form': form, 'medications': medications}
     return render(request, 'healthcare/editMedication.html', context)
 
+def editTreatement(request):
+    form = TreatmentForm()
+    treatments = Treatment.objects.all()
 
+    if request.method == 'POST':
+        form = TreatmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('treatment')
+
+    context = {'form': form, 'treatments': treatments}
+    return render(request, 'healthcare/editTreatment.htm', context)
 

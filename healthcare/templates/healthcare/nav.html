@@ -36,10 +36,12 @@
             <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
                 <i class="fas fa-viruses"></i>Staff </a>
             <div class="dash-nav-dropdown-menu">
-                <a href="" class="dash-nav-dropdown-item dash-nav-item">
+                <a href="{% url 'listPatient' %}" class="dash-nav-dropdown-item dash-nav-item">
                     All Pateint</a>
                 <a href="{% url 'medication' %}" class="dash-nav-dropdown-item dash-nav-item">
                     Medication</a>
+                 <a href="{% url 'treatment' %}" class="dash-nav-dropdown-item dash-nav-item">
+                    Treatment</a>
             </div>
         </div>
 {% endif %}

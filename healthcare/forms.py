@@ -34,7 +34,7 @@ class MedicationForm(ModelForm):
         model = Medication
         fields = '__all__'
 
-class Treatment(ModelForm):
+class TreatmentForm(ModelForm):
     class Meta:
         model = Treatment
         fields = '__all__'
