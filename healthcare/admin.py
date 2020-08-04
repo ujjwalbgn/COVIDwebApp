@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(Patient)
 admin.site.register(TestLocation)
 admin.site.register(CovidScreening)
+admin.site.register(Medication)

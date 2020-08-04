@@ -15,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import *
 from .forms import *
 
+
 # Create your views here.
 
 def registerPage(request):
@@ -50,7 +51,7 @@ def loginPage(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.info(request,'Username or Password is incorrect')
+                messages.warning(request,'Username or Password is incorrect')
 
     content= {}
     return render(request, 'healthcare/login.html', content)
@@ -62,12 +63,10 @@ def logoutUser(request):
 def home(request):
     if request.user.is_authenticated:
         current_user = request.user
-
         try:
             patient = Patient.objects.get(user = current_user)
         except ObjectDoesNotExist:
-            messages.info(request, 'Sign in as Patient')
-            return redirect('logout')
+            patient = None
 
         context = {'user': current_user, 'patient': patient}
     else:
@@ -95,7 +94,11 @@ def testLocation(request):
     testLocations = TestLocation.objects.all()
 
     if request.user.is_authenticated:
-        patient = Patient.objects.get(user=request.user)
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            patient = None
         context = {'testLocations': testLocations, 'patient': patient}
     else:
         context = {'testLocations': testLocations}
@@ -112,7 +115,7 @@ def covidScreening(request):
         form = CovidScreeningForm(request.POST)
         if form.is_valid():
 
-
+            # todo save to existing patient
 
             closeContactWithCovid19Patient = form.cleaned_data['have_you_been_in_contact_with_COVID19_patient_or_one_who_had_close_contact_with_Covid19_patient']
             counter = 0
@@ -129,13 +132,28 @@ def covidScreening(request):
 
 
     if request.user.is_authenticated:
-        patient = Patient.objects.get(user=request.user)
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            # print("Unable to find patient ID")
+            patient = None
         context = {'form': form, 'patient': patient}
     else:
         context = {'form': form}
     return render(request, 'healthcare/covidScreening.html', context)
 
 
+def editMedication(request):
+    form = MedicationForm()
+    context = {'form': form}
+    if request.method == 'POST':
+        form = CovidScreeningForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    return render(request, 'healthcare/editMedication.html', context)
 
 
 

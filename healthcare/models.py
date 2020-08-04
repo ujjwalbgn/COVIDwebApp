@@ -44,7 +44,6 @@ class TestLocation(models.Model):
 
 
 class CovidScreening(models.Model):
-
     BOOL_CHOICES = [('Y', 'Yes'), ('N', 'No')]
     OPT_CHOICES = [('Y', 'Yes'), ('N', 'No'),('NA', 'I do not know')]
 
@@ -65,3 +64,12 @@ class CovidScreening(models.Model):
         else:
             display = str(self.id)
         return display
+
+
+class Medication(models.Model):
+    name =  models.CharField(max_length= 200, null= True)
+    description =  models.CharField(max_length= 2000, blank = True)
+
+class Treatment(models.Model):
+    name = models.CharField(max_length= 200, null= True)
+    description = models.CharField(max_length= 2000, blank = True)

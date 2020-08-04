@@ -20,12 +20,36 @@
                 <a href="chartjs.html" class="dash-nav-dropdown-item">Chart.js</a>
             </div>
         </div>
-       <div class="dash-nav-dropdown">
+        {% if user.is_authenticated %}
+    {% if not user.is_staff  %}
+        <div class="dash-nav-dropdown">
+            <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                <i class="fas fa-viruses"></i> Medical Record </a>
+            <div class="dash-nav-dropdown-menu">
+                <a href="{%  url 'editPatient' patient.id %}" class="dash-nav-dropdown-item dash-nav-item">
+                    View/Edit Records</a>
+            </div>
+        </div>
+    {% endif %}
+        {% if user.is_staff  %}
+            <div class="dash-nav-dropdown">
+            <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                <i class="fas fa-viruses"></i>Staff </a>
+            <div class="dash-nav-dropdown-menu">
+                <a href="" class="dash-nav-dropdown-item dash-nav-item">
+                    All Pateint</a>
+                <a href="{% url 'medication' %}" class="dash-nav-dropdown-item dash-nav-item">
+                    Medication</a>
+            </div>
+        </div>
+{% endif %}
+    {% endif %}
+        <div class="dash-nav-dropdown">
             <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
                 <i class="fas fa-viruses"></i> COVID </a>
             <div class="dash-nav-dropdown-menu">
                 <a href="{% url 'testLocation' %}" class="dash-nav-dropdown-item dash-nav-item">
-                   Test Sites</a>
+                    Test Sites</a>
 
                 <a href="{% url 'covidScreening' %}" class="dash-nav-dropdown-item">COVID Screening</a>
 
@@ -34,7 +58,7 @@
 
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}" class="dash-nav-item">
-               </i> Log Out </a>
+                </i> Log Out </a>
 
         {% else %}
 
