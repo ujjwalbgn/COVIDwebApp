@@ -5,12 +5,12 @@
     {% load myfilters %}
     <main class="dash-content">
         <div class="container-fluid">
-            <h1 class="dash-title">COVID Test Locations</h1>
+            <h1 class="dash-title">All Patients</h1>
             <div class="row">
                 <div class="col-lg-10">
                     <div class="card spur-card">
                         <div class="card-header">
-                            <div class="spur-card-title">Test Locations in Tarrant County</div>
+                            <div class="spur-card-title">List of Pateints</div>
                         </div>
                         <div class="card-body ">
                             <table class="table table-hover table-in-card">
@@ -18,25 +18,25 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Address</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">More</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                {% for testLocation in testLocations %}
+                                {% for patient in patients %}
                                     <tr>
                                         <th scope="row"> {{ forloop.counter }}</th>
-                                        <td>{{ testLocation.name }}</td>
+                                        <td>{{ patient }}</td>
                                         <td>
-
-                                            <a target="_blank"  href="tel:{{ testLocation.phone_number }}">
-                                            <i class="fas fa-phone" aria-hidden="true"></i> {{ testLocation.phone_number }}
-                                            </a>
+                                            {{ patient.age }}
                                         </td>
                                         <td>
-                                            <a target="_blank"  href="https://maps.google.com/?q={{ testLocation.address }}">
-                                               <i class="fas fa-map-marked-alt"></i>  {{ testLocation.address }}</a>
+                                            {{ patient.gender }}
+                                        </td>
+                                        <td>
+                                            <a href=" {% url 'editPatient' patient.id %}" {{ patient.gender }}>View/Edit</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
