@@ -32,4 +32,7 @@ urlpatterns = [
     path('medication/', views.editMedication, name="medication"),
     path('treatment/', views.editTreatement, name="treatment"),
 
+    path('assign_med/', views.assignMed, name="assignMed"),
+    path('assign_treatment/', views.assignTreatment, name="assignTreatment"),
+
 ]

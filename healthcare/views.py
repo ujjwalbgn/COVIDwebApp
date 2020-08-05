@@ -77,22 +77,54 @@ def home(request):
 
 def listPatient(request):
     patients = Patient.objects.all()
+
     context = {'patients': patients}
 
     return render(request, 'healthcare\listPatient.html', context)
 
 def editPatient(request,pk):
     patient = Patient.objects.get(id = pk)
+    patientMeds = patient.assignmed_set.all()
+    patientTreatments = patient.assigntreatment_set.all()
+
+    assignMedForm = AssignMedForm()
+    assignTreatmentForm = AssignTreatmentForm()
+
     form = PatientForm(instance = patient)
-    context = {'form': form, 'patient': patient}
+    context = {'form': form, 'patient': patient, 'patientMeds':patientMeds, 'patientTreatments': patientTreatments,
+                'assignMedForm':assignMedForm,'assignTreatmentForm':assignTreatmentForm }
 
     if request.method == 'POST':
         form = PatientForm(request.POST, instance=patient)
         if form.is_valid():
             form.save()
+            messages.success(request,'Patient profile updated')
             return HttpResponseRedirect(request.path_info)
 
     return render(request, 'healthcare/patientForm.html', context)
+
+
+def assignMed(request):
+    if request.method == 'POST':
+        form = AssignMedForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Medication has been added to patient profile')
+            return redirect('listPatient')
+            # todo need to figure out routing
+        else:
+            messages.warning(request, 'Something went wrong!')
+
+def assignTreatment(request):
+    if request.method == 'POST':
+        form = AssignTreatmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Treatment has been added to patient profile')
+            return redirect('listPatient')
+            # todo need to figure out routing
+        else:
+            messages.warning(request, 'Something went wrong!')
 
 
 def testLocation(request):
