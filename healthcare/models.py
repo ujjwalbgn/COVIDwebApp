@@ -80,3 +80,25 @@ class Treatment(models.Model):
 
     def __str__(self):
         return self.name
+
+class AssignMed(models.Model):
+      patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
+      medication = models.ForeignKey(Medication,on_delete=models.CASCADE)
+
+      class Meta:
+          ordering = ['medication']
+
+      def __str__(self):
+          return self.medication.name
+
+
+class AssignTreatment(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    treatment = models.ForeignKey(Treatment, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['treatment']
+
+    def __str__(self):
+        return self.treatment.name
+

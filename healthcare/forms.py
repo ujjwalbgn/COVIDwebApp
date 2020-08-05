@@ -38,3 +38,13 @@ class TreatmentForm(ModelForm):
     class Meta:
         model = Treatment
         fields = '__all__'
+
+class AssignMedForm(ModelForm):
+    class Meta:
+        model = AssignMed
+        fields = '__all__'
+
+class AssignTreatmentForm(ModelForm):
+    class Meta:
+        model = AssignTreatment
+        fields = '__all__'
