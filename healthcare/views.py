@@ -90,8 +90,8 @@ def home(request):
     # else:
     #     context= {'tarrant_date':tarrant_date, 'tarrant_confirmed':tarrant_confirmed,'tarrant_death':tarrant_death,
     #                }
-        context = {'user': current_user, 'patient': patient}
-        else:
+        context = {'user': current_user, 'patient': patient,}
+    else:
         context = {}
     return render(request, 'healthcare/home.html', context )
 
