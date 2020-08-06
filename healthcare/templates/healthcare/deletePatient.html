@@ -1,0 +1,32 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Delete Patient Record</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">Confirm to delete</div>
+                        </div>
+                        <div class="card-body ">
+
+                                <p>Are you sure you want to delete record for patient: "{{patient.first_Name}} {{patient.last_Name}}" ?</p>
+                                <form action="{% url 'deletepatient' patient.id %}" method="POST">
+
+                                    {% csrf_token %}
+                                    <a href="{% url 'listPatient' %}">Cancel</a>
+
+                                    <input type="submit" name="Confirm">
+
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
