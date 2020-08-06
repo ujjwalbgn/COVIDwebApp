@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
 
 from django.core.exceptions import ObjectDoesNotExist
+import requests, csv
 
 
 
@@ -63,6 +64,21 @@ def logoutUser(request):
     return redirect('login')
 
 def home(request):
+    url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"
+    response = requests.get(url)
+    data_tarrant = []
+    if response.status_code != 200:
+        print('Failed to get data:', response.status_code)
+    else:
+        wrapper = csv.reader(response.text.strip().split('\n'))
+        for row in wrapper:
+            if row[1] == "Tarrant":
+                tarrant_date = row[0]
+                tarrant_confirmed = row[4]
+                tarrant_death = row[5]
+
+    graph_lables = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
     if request.user.is_authenticated:
         current_user = request.user
         try:
@@ -70,9 +86,12 @@ def home(request):
         except ObjectDoesNotExist:
             patient = None
 
-        context = {'user': current_user, 'patient': patient}
+        context = {'user': current_user, 'patient': patient,'tarrant_date':tarrant_date,
+                   'tarrant_confirmed':tarrant_confirmed,'tarrant_death':tarrant_death,
+                   'graph_lables':graph_lables}
     else:
-        context= {}
+        context= {'tarrant_date':tarrant_date, 'tarrant_confirmed':tarrant_confirmed,'tarrant_death':tarrant_death,
+                   'graph_lables':graph_lables}
     return render(request, 'healthcare/home.html', context )
 
 def listPatient(request):
