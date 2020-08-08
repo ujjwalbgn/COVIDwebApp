@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Needed for heroku deployment
-# import django_heroku
+import django_heroku
 # django_heroku.settings(locals())
 
 
@@ -126,6 +126,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# define if on heroku environment
+ON_HEROKU = 'ON_HEROKU' in os.environ
+
+if ON_HEROKU:
+    django_heroku.settings(locals())
 
 
 #SMTP Configuration

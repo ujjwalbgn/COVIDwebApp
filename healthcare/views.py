@@ -75,6 +75,24 @@ def home(request):
                 tarrant_date = row[0]
                 tarrant_confirmed = row[4]
                 tarrant_death = row[5]
+            if row[1] == "Dallas":
+                dallas_confirmed = row[4]
+                dallas_death = row[5]
+            if row[1] == "Collin":
+                collin_confirmed = row[4]
+                collin_death = row[5]
+            if row[1] == "Johnson":
+                johnson_confirmed = row[4]
+                johnson_death = row[5]
+            if row[1] == "Denton":
+                denton_confirmed = row[4]
+                denton_death = row[5]
+            if row[1] == "Parker":
+                parker_confirmed = row[4]
+                parker_death = row[5]
+            if row[1] == "Johnson":
+                johnson_confirmed = row[4]
+                johnson_death = row[5]
 
 
     if request.user.is_authenticated:
@@ -84,15 +102,22 @@ def home(request):
         except ObjectDoesNotExist:
             patient = None
 
-        context = {'user': current_user, 'patient': patient,'tarrant_date':tarrant_date,
+        context = {'user': current_user, 'patient': patient,'date':tarrant_date,
                    'tarrant_confirmed':tarrant_confirmed,'tarrant_death':tarrant_death,
+                   'dallas_confirmed':dallas_confirmed,'dallas_death':dallas_death,
+                   'denton_confirmed':denton_confirmed,'denton_death':denton_death,
+                   'parker_confirmed':parker_confirmed,'parker_death':parker_death,
+                   'johnson_confirmed': johnson_confirmed, 'johnson_death':johnson_death,
+                   'collin_confirmed':collin_confirmed, 'collin_death':collin_death,
                    }
     else:
         context= {'tarrant_date':tarrant_date, 'tarrant_confirmed':tarrant_confirmed,'tarrant_death':tarrant_death,
-                   }
-    #     context = {'user': current_user, 'patient': patient,}
-    # else:
-    #     context = {}
+                  'dallas_confirmed':dallas_confirmed,'dallas_death':dallas_death,
+                  'denton_confirmed':denton_confirmed,'denton_death':denton_death,
+                  'parker_confirmed':parker_confirmed,'parker_death':parker_death,
+                  'johnson_confirmed': johnson_confirmed, 'johnson_death':johnson_death,
+                  'collin_confirmed':collin_confirmed, 'collin_death':collin_death}
+
     return render(request, 'healthcare/home.html', context )
 
 def listPatient(request):
@@ -112,7 +137,7 @@ def editPatient(request,pk):
 
     form = PatientForm(instance = patient)
     context = {'form': form, 'patient': patient, 'patientMeds':patientMeds, 'patientTreatments': patientTreatments,
-                'assignMedForm':assignMedForm,'assignTreatmentForm':assignTreatmentForm }
+               'assignMedForm':assignMedForm,'assignTreatmentForm':assignTreatmentForm }
 
     if request.method == 'POST':
         form = PatientForm(request.POST, instance=patient)
@@ -231,6 +256,6 @@ def DeletePatient(request, pk):
     patient = Patient.objects.get(id=pk)
     context = {'patient' : patient}
     if request.method == "POST":
-         patient.delete()
-         return redirect('listPatient')
+        patient.delete()
+        return redirect('listPatient')
     return render(request, "healthcare/deletePatient.html", context)
