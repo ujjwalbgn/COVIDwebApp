@@ -21,7 +21,7 @@ from .forms import *
 
 
 # Create your views here.
-
+@unauthenticated_user
 def registerPage(request):
 
     form = CreateUserForm()
@@ -30,8 +30,6 @@ def registerPage(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-
-
             messages.success(request,'Account was created for ' + username)
 
             return redirect('login')
@@ -39,7 +37,7 @@ def registerPage(request):
     context= {'form': form}
     return render(request, 'healthcare/register.html', context)
 
-
+@unauthenticated_user
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -121,6 +119,8 @@ def home(request):
 
     return render(request, 'healthcare/home.html', context )
 
+# @allowed_users(allowed_roles=['staff'])
+@staff_only
 def listPatient(request):
     patients = Patient.objects.all()
 
@@ -149,7 +149,7 @@ def editPatient(request,pk):
 
     return render(request, 'healthcare/patientForm.html', context)
 
-
+@staff_only
 def assignMed(request):
     if request.method == 'POST':
         form = AssignMedForm(request.POST)
@@ -161,6 +161,7 @@ def assignMed(request):
         else:
             messages.warning(request, 'Something went wrong!')
 
+@staff_only
 def assignTreatment(request):
     if request.method == 'POST':
         form = AssignTreatmentForm(request.POST)
@@ -239,7 +240,7 @@ def covidScreening(request):
         context = {'form': form}
     return render(request, 'healthcare/covidScreening.html', context)
 
-
+@staff_only
 def editMedication(request):
     form = MedicationForm()
     medications = Medication.objects.all()
@@ -253,6 +254,7 @@ def editMedication(request):
     context = {'form': form, 'medications': medications}
     return render(request, 'healthcare/editMedication.html', context)
 
+@staff_only
 def editTreatement(request):
     form = TreatmentForm()
     treatments = Treatment.objects.all()
@@ -266,6 +268,7 @@ def editTreatement(request):
     context = {'form': form, 'treatments': treatments}
     return render(request, 'healthcare/editTreatment.htm', context)
 
+@staff_only
 def DeletePatient(request, pk):
     patient = Patient.objects.get(id=pk)
     context = {'patient' : patient}
