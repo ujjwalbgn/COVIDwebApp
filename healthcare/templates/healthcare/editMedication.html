@@ -48,6 +48,8 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Description</th>
+                                    <th scope="col">Delete</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -58,6 +60,10 @@
                                         <td>{{ medication.name }}</td>
                                         <td>
                                             {{ medication.description }}
+                                        </td>
+
+                                        <td>
+                                            <a href=" {% url 'deletemedication' medication.id %}">Remove</a>
                                         </td>
 
                                     </tr>
