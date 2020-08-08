@@ -227,3 +227,10 @@ def editTreatement(request):
     context = {'form': form, 'treatments': treatments}
     return render(request, 'healthcare/editTreatment.htm', context)
 
+def DeletePatient(request, pk):
+    patient = Patient.objects.get(id=pk)
+    context = {'patient' : patient}
+    if request.method == "POST":
+         patient.delete()
+         return redirect('listPatient')
+    return render(request, "healthcare/deletePatient.html", context)
