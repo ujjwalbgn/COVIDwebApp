@@ -12,14 +12,7 @@
             </div>
         {% endif %}
         <a href="{% url 'home' %}" class="dash-nav-item">
-            <i class="fas fa-home"></i> Dashboard </a>
-        <div class="dash-nav-dropdown">
-            <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
-                <i class="fas fa-chart-bar"></i> Charts </a>
-            <div class="dash-nav-dropdown-menu">
-                <a href="chartjs.html" class="dash-nav-dropdown-item">Chart.js</a>
-            </div>
-        </div>
+            <i class="fas fa-home"></i> Home </a>
         {% if user.is_authenticated %}
     {% if not user.is_staff  %}
         <div class="dash-nav-dropdown">
