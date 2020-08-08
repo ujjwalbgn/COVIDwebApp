@@ -56,7 +56,7 @@ class CovidScreening(models.Model):
     sustained_loss_of_smell_or_taste = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
     body_aches = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
     vomiting_or_diarrhoea = models.CharField(max_length=2, choices=BOOL_CHOICES, null=True)
-    have_you_been_in_contact_with_COVID19_patient_or_one_who_had_close_contact_with_Covid19_patient = models.CharField(max_length=2, choices=OPT_CHOICES, null=True)
+    have_you_been_in_contact_with_COVID19_patient = models.CharField(max_length=2, choices=OPT_CHOICES, null=True)
     have_you_been_to_any_COVID_affected_regions = models.CharField(max_length=2, choices=OPT_CHOICES, null=True)
 
     def __str__(self):
