@@ -43,8 +43,11 @@
 
             </div>
             {%  include 'healthcare/viewMedTreatment.html' %}
+
+        {% if user.is_staff  %}
         {% include 'healthcare/assignMed.html' %}
                 {% include 'healthcare/assignTreatment.html' %}
+        {% endif %}
 
         </div>
 

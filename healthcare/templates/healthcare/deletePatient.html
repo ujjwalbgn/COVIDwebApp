@@ -17,7 +17,7 @@
                             <form action="{% url 'deletepatient' patient.id %}" method="POST">
                                 {% csrf_token %}
                                 <a class="btn btn-primary mb-1" href="{% url 'listPatient' %}">Cancel</a>
-                                <button type="submit" class="btn btn-danger mb-1">Delete User</button>
+                                <button type="submit" class="btn btn-danger mb-1">Delete Patient</button>
                             </form>
                         </div>
 
