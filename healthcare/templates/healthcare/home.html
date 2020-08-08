@@ -10,12 +10,12 @@
             <div class="row dash-row">
                 <div class="col-xl-6">
                     <div class="stats stats-warning">
-                        <h3 class="stats-title"> Confirmed </h3>
+                        <h3 class="stats-title"> Confirmed Cases </h3>
                         <div class="stats-content">
                             <div class="stats-data">
                                 <div class="stats-number">{{ tarrant_confirmed }}</div>
                                 <div class="stats-change">
-                                    <span class="stats-timeframe">As of {{ tarrant_date }}</span>
+                                    <span class="stats-timeframe">As of {{ date }} in Tarrant County</span>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                             <div class="stats-data">
                                 <div class="stats-number">{{ tarrant_death }}</div>
                                 <div class="stats-change">
-                                    <span class="stats-timeframe">As of {{ tarrant_date }}</span>
+                                    <span class="stats-timeframe">As of {{ date }} in Tarrant County</span>
                                 </div>
                             </div>
                         </div>
@@ -36,43 +36,57 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-6">
+                <div class="col-xl-12">
                     <div class="card spur-card">
                         <div class="card-header">
-                            <div class="spur-card-icon">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                            <div class="spur-card-title"> Notifications </div>
+                            <div class="spur-card-title">COVID Statistics</div>
                         </div>
                         <div class="card-body ">
-                            <div class="notifications">
-                                <a href="#!" class="notification">
-                                    <div class="notification-icon">
-                                        <i class="fas fa-inbox"></i>
-                                    </div>
-                                    <div class="notification-text">New comment</div>
-                                    <span class="notification-time">21 days ago</span>
-                                </a>
-                                <a href="#!" class="notification">
-                                    <div class="notification-icon">
-                                        <i class="fas fa-inbox"></i>
-                                    </div>
-                                    <div class="notification-text">New comment</div>
-                                    <span class="notification-time">21 days ago</span>
-                                </a>
-                                <a href="#!" class="notification">
-                                    <div class="notification-icon">
-                                        <i class="fas fa-inbox"></i>
-                                    </div>
-                                    <div class="notification-text">New comment</div>
-                                    <span class="notification-time">21 days ago</span>
-                                </a>
-                                <div class="notifications-show-all">
-                                    <a href="#!">Show all</a>
-                                </div>
-                            </div>
+                            <table class="table table-hover table-in-card">
+                                <thead>
+                                <tr>
+
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Confirmed Cases</th>
+                                    <th scope="col">Deaths</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Dallas County</td>
+                                    <td>{{ dallas_confirmed }} </td>
+                                    <td>{{ dallas_death }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Tarrant County</td>
+                                    <td>{{ tarrant_confirmed }} </td>
+                                    <td>{{ tarrant_death }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Collin County</td>
+                                    <td>{{ collin_confirmed }} </td>
+                                    <td>{{ collin_death }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Denton County</td>
+                                    <td>{{ denton_confirmed }} </td>
+                                    <td>{{ denton_death }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Parker County</td>
+                                    <td>{{ parker_confirmed }} </td>
+                                    <td>{{ parker_death }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Johnson County</td>
+                                    <td>{{ johnson_confirmed }} </td>
+                                    <td>{{ johnson_death }}</td>
+                                </tr>
+                                </tbody>
+
+                            </table>
                         </div>
-                    </div>
+                    </div><p class="font-weight-lighter">As of {{ date }}. <a target="_blank" href="https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv">Source</a> </p>
                 </div>
             </div>
         </div>
