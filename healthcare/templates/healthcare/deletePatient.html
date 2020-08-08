@@ -13,16 +13,14 @@
                         </div>
                         <div class="card-body ">
 
-                                <p>Are you sure you want to delete record for patient: "{{patient.first_Name}} {{patient.last_Name}}" ?</p>
-                                <form action="{% url 'deletepatient' patient.id %}" method="POST">
-
-                                    {% csrf_token %}
-                                    <a href="{% url 'listPatient' %}">Cancel</a>
-
-                                    <input type="submit" name="Confirm">
-
-                                </form>
+                            <p>Are you sure you want to delete record for patient: "{{patient.first_Name}} {{patient.last_Name}}" ?</p>
+                            <form action="{% url 'deletepatient' patient.id %}" method="POST">
+                                {% csrf_token %}
+                                <a class="btn btn-primary mb-1" href="{% url 'listPatient' %}">Cancel</a>
+                                <button type="submit" class="btn btn-danger mb-1">Delete User</button>
+                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>
