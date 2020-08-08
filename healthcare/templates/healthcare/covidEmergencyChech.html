@@ -1,0 +1,66 @@
+
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Forms</h1>
+            <div class="row">
+                <div class="col-xl-9">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="spur-card-title"> Online COVID-19 Screening Form </div>
+                        </div>
+                        <div class="card-body">
+
+                            <h5>Is this an emergency?</h5><br/>
+                            <p>In case of an emergency, stop and call 911</p>
+                            <hr/>
+                            <p>Are you experiencing the following symptoms ?</p>
+                            <ul>
+                                <li>
+                                    Bluish lips or face
+                                </li>
+                                <li>
+                                    Severe and constant pain or pressure in the chest
+                                </li>
+                                <li>
+                                    Extreme difficulty breathing (such as gasping for air or being unable to talk without catching your breath)
+                                </li>
+                                <li>
+                                    Severe and constant dizziness or light headedness
+                                </li>
+                                <li>
+                                    New serious disorientation (acting confused)
+                                </li>
+                                <li>
+                                    Unconscious or very difficult to wake up
+                                </li>
+                                <li>
+                                    Slurred speech or difficulty speaking (new or worsening)
+                                </li>
+                                <li>
+                                    Seizures
+                                </li>
+                                <li>
+                                    Signs of low blood pressure (too weak to stand, light headed, feeling cold, pale, clammy skin)
+                                </li>
+                            </ul>
+                            <div class="row justify-content-md-center">
+                                <div class="col sm-6">
+                                    <a class="btn btn-outline-danger" href="{% url 'covidScreening' %}">I`m experiencing at least one of these</a>
+
+                                    <a class="btn btn-outline-danger" href="{% url 'covidScreening' %}">I do not have any of these</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}
