@@ -3,10 +3,15 @@
 {% block content %}
     <main class="dash-content">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row justify-content-md-center">
                 <div class="col-xl-12">
+                    <a href="{% url 'covidScreening' %}" class="btn btn-secondary btn-lg btn-block mb-1">Online COVID SCREENING</a>
+
                 </div>
             </div>
+{#            <div class="col-xl-8">#}
+{#                <a href="{% url 'covidScreening' %}" class="btn btn-secondary btn-lg btn-block mb-1">Online COVID SCREENING</a>#}
+{#            </div>#}
             <div class="row dash-row">
                 <div class="col-xl-6">
                     <div class="stats stats-warning">
