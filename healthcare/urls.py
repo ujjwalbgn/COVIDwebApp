@@ -28,6 +28,8 @@ urlpatterns = [
 
     path('testlocation/', views.testLocation, name="testLocation"),
     path('covidscreening/', views.covidScreening, name="covidScreening"),
+    path('covidemergencychech/', views.covidEmergencyChech, name="covidEmergencyChech"),
+    path('call911/', views.call911, name="call911"),
 
     path('medication/', views.editMedication, name="medication"),
     path('treatment/', views.editTreatement, name="treatment"),
