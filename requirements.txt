@@ -2,3 +2,5 @@ django
 gunicorn
 django-heroku
 whitenoise
+requests
+csv
