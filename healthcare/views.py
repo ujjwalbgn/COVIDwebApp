@@ -13,6 +13,7 @@ from django.contrib.auth.models import Group, User
 from django.core.exceptions import ObjectDoesNotExist
 import requests, csv
 
+from .decorators import unauthenticated_user, allowed_users, staff_only
 
 
 from .models import *
@@ -189,6 +190,19 @@ def testLocation(request):
     return render(request, 'healthcare/testLocationForm.html', context)
 
 
+def covidEmergencyChech(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            # print("Unable to find patient ID")
+            patient = None
+        context = { 'patient': patient}
+    else:
+        context = {}
+    return render(request, 'healthcare/covidEmergencyChech.html', context)
+
 
 def covidScreening(request):
 
@@ -259,3 +273,6 @@ def DeletePatient(request, pk):
         patient.delete()
         return redirect('listPatient')
     return render(request, "healthcare/deletePatient.html", context)
+
+def call911(request):
+    return render(request, "healthcare/call911.html")
