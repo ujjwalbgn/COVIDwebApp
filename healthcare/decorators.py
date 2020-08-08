@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.contrib import messages
+
 
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
+            # messages.warning(request, 'Your are redirected')
             return redirect('home')
         else:
             return view_func(request, *args, **kwargs)
@@ -32,9 +35,11 @@ def staff_only(view_func):
             group = request.user.groups.all()[0].name
 
         if group == 'patient':
-            return redirect('')
+            messages.warning(request, 'Your are Redirected as you are not authorized to view the requested page ')
+            return redirect('home')
 
-        if group == 'admin':
+        if group == 'staff':
+
             return view_func(request, *args, **kwargs)
 
     return wrapper_function
