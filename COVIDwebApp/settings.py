@@ -89,8 +89,12 @@ WSGI_APPLICATION = 'COVIDwebApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST' : 'ec2-107-20-15-85.compute-1.amazonaws.com',
+        'NAME': 'd36q9lk40h5lj4',
+        'USER': 'sqvqfugzjxlitl',
+        'PASSWORD': 'a0e90ffd7d2b17171e527defaeccb113f95df5e7445e38fd337df718dc14ec19',
+        'PORT': '5432',
     }
 }
 
