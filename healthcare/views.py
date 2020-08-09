@@ -208,6 +208,16 @@ def covidEmergencyChech(request):
 def covidScreening(request):
 
     form = CovidScreeningForm()
+    if request.user.is_authenticated:
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            # print("Unable to find patient ID")
+            patient = None
+        context = {'form': form, 'patient': patient}
+    else:
+        context = {'form': form}
     if request.method == 'POST':
         form = CovidScreeningForm(request.POST)
         if form.is_valid():
@@ -227,20 +237,10 @@ def covidScreening(request):
                 messages.info(request, 'According to the data you provided, we recommend COVID testing')
                 return redirect('testLocation')
             else:
-                messages.info(request, 'Chill No COVID. ')
-                return redirect('testLocation')
+                # messages.info(request, 'You are under low risk. ')
+                return render(request, 'healthcare/noCovid.html', context)
 
 
-    if request.user.is_authenticated:
-        current_user = request.user
-        try:
-            patient = Patient.objects.get(user=current_user)
-        except ObjectDoesNotExist:
-            # print("Unable to find patient ID")
-            patient = None
-        context = {'form': form, 'patient': patient}
-    else:
-        context = {'form': form}
     return render(request, 'healthcare/covidScreening.html', context)
 
 @staff_only
@@ -282,3 +282,6 @@ def DeletePatient(request, pk):
 
 def call911(request):
     return render(request, "healthcare/call911.html")
+
+def Covidnegative(request):
+    return render(request, "healthcare/noCovid.html")
