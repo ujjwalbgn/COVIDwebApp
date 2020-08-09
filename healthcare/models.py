@@ -5,6 +5,7 @@ from django.db import models
 # Create your models here.
 class Patient(models.Model):
     GENDER_CHOICES = [('M', 'Male'), ('F', 'Female'), ('O', 'Other'),('NA', 'I do not wish to say')]
+    BOOL_CHOICES = [('Y', 'Yes'), ('N', 'No')]
 
     user = models.OneToOneField(User, null=True,blank=True, on_delete=models.CASCADE)
     first_Name = models.CharField(max_length= 200, null= True)
@@ -24,6 +25,11 @@ class Patient(models.Model):
     emergency_contact_phone = models.CharField( max_length=200, null=True)
     emergency_contact_address = models.CharField(max_length=200, null=True)
     insurance_provider = models.CharField(max_length=200, null=True)
+    diagnosis = models.TextField(blank=True, null=True)
+    pre_existing_conditions = models.TextField(blank=True, null=True)
+    lab_reports = models.TextField(blank=True, null=True)
+    have_you_been_tested_positive_for_COVID = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
+
 
     def __str__(self):
         if (self.first_Name and self.last_Name):
@@ -80,14 +86,14 @@ class Treatment(models.Model):
         return self.name
 
 class AssignMed(models.Model):
-      patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
-      medication = models.ForeignKey(Medication,on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
+    medication = models.ForeignKey(Medication,on_delete=models.CASCADE)
 
-      class Meta:
-          ordering = ['medication']
+    class Meta:
+        ordering = ['medication']
 
-      def __str__(self):
-          return self.medication.name
+    def __str__(self):
+        return self.medication.name
 
 
 class AssignTreatment(models.Model):
@@ -103,9 +109,9 @@ class AssignTreatment(models.Model):
 
 class Appointment(models.Model):
     TIME_SLOTS = [('8-9', '8am-9am'), ('9-10', '9am-10am'), ('10-11', '10am-11am'), ('11-12', '11am-12pm'),
-                              ('12-1', '12pm-1pm'), ('1-2', '1pm-2pm'), ('2-3', '2pm-3pm'), ('3-4', '3pm-4pm'),
-                              ('4-5', '4pm-5pm'), ('5-6', '5pm-6pm'), ('6-7', '6pm-7pm'), ('7-8', '7pm-8pm'),
-                              ('8-9', '8pm-9pm')]
+                  ('12-1', '12pm-1pm'), ('1-2', '1pm-2pm'), ('2-3', '2pm-3pm'), ('3-4', '3pm-4pm'),
+                  ('4-5', '4pm-5pm'), ('5-6', '5pm-6pm'), ('6-7', '6pm-7pm'), ('7-8', '7pm-8pm'),
+                  ('8-9', '8pm-9pm')]
 
     APT_CHOICES = [('A', 'Approved'), ('D', 'Denied'), ('P', 'Pending')]
     staff =  models.CharField(max_length= 200, null= True)
@@ -122,11 +128,24 @@ class Appointment(models.Model):
             display = str(self.id)
         return display
 
-# class ContactTracing(models.Model):
-#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-
-
-
+class ContactTracing(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    full_name_of_person_1 = models.CharField(max_length= 200, null= True, blank=True)
+    contact_information_of_person_1 = models.CharField(max_length= 200, null= True, blank=True)
+    full_name_of_person_2 = models.CharField(max_length=200, null=True, blank=True)
+    contact_information_of_person_2 = models.CharField(max_length=200, null=True, blank=True)
+    full_name_of_person_3 = models.CharField(max_length=200, null=True, blank=True)
+    contact_information_of_person_3 = models.CharField(max_length=200, null=True, blank=True)
+    full_name_of_person_4 = models.CharField(max_length=200, null=True, blank=True)
+    contact_information_of_person_4 = models.CharField(max_length=200, null=True, blank=True)
+    full_name_of_person_5 = models.CharField(max_length=200, null=True, blank=True)
+    contact_information_of_person_5 = models.CharField(max_length=200, null=True, blank=True)
+    full_name_of_person_6 = models.CharField(max_length=200, null=True, blank=True)
+    contact_information_of_person_6 = models.CharField(max_length=200, null=True, blank=True)
+    public_places_visited_1 = models.CharField(max_length= 200, null= True, blank=True)
+    public_places_visited_2 = models.CharField(max_length= 200, null= True, blank=True)
+    public_places_visited_3 = models.CharField(max_length=200, null=True, blank=True)
+    public_places_visited_4 = models.CharField(max_length=200, null=True, blank=True)
 
 
 
@@ -135,7 +154,7 @@ class PeriodicReporting(models.Model):
     OPT_CHOICES = [('Yes', 'Yes'), ('No', 'No'), ('NA', 'I do not know')]
 
     patient = models.OneToOneField(Patient, null=True, blank=True, on_delete=models.CASCADE)
-    date = models.DateField(null=True, blank=True)
+    date = models.DateField(auto_now_add = True)
     fever_above_100_F = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
     cough = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
     shortness_of_breath_or_difficulty_breathing = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
