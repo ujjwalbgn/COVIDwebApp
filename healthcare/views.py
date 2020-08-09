@@ -311,3 +311,21 @@ def ScheduleAppointment(request):
     context = {'form': form, 'appointments': appointments,'patient':patient,
                }
     return render(request, 'healthcare/ScheduleAppointment.html', context)
+
+@staff_only
+def DeleteMedication(request, pk):
+    medication = Medication.objects.get(id=pk)
+    context = {'medication' : medication}
+    if request.method == "POST":
+        medication.delete()
+        return redirect('medication')
+    return render(request, "healthcare/deleteMedication.html", context)
+
+@staff_only
+def DeleteTreatment(request, pk):
+    treatment = Treatment.objects.get(id=pk)
+    context = {'treatment' : treatment}
+    if request.method == "POST":
+        treatment.delete()
+        return redirect('treatment')
+    return render(request, "healthcare/deleteTreatment.html", context)
