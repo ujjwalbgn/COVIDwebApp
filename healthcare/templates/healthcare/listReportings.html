@@ -1,0 +1,49 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Symptoms Reporting</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">List of current health conditions reported by patients. </div>
+                        </div>
+                        <div class="card-body ">
+                            <table class="table table-hover table-in-card">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Patient</th>
+                                    <th scope="col">Report Submitted Date</th>
+                                    <th scope="col">View Report</th>
+                                    <th scope="col">Choose to delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for reporting in reportings %}
+                                    <tr>
+                                        <th scope="row"> {{ forloop.counter }}</th>
+                                        <td>{{ reporting.patient }}</td>
+                                        <td>{{ reporting.date }}</td>
+                                        <td>
+                                            <a href=" {% url 'viewreportings' reporting.id %}">View Report</a>
+                                        </td>
+                                        <td>
+                                            <a href=" {% url 'deleteperiodicsymptomsreport' reporting.id %}">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
