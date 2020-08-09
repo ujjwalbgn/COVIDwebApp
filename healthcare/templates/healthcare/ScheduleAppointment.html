@@ -1,0 +1,103 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+
+            <h1 class="dash-title">Schedule Appointment</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">Choose appointment dates/times.</div>
+                        </div>
+                        <div class="card-body ">
+
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                        <input type="hidden" id="patient" name="patient" value="{{patient.id }}">
+                        <input type="hidden" id="status" name="status" value="P">
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Staff</label>
+                                    <div class="col-sm-9">
+                                        <select name="staff" class="form-control" id="id_staff" required >
+                                            {% for staff in staffs %}
+                                                <option value="{{ staff.id }}">{{ staff.get_full_name }}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Pick Date</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" name="pick_Date" class="form-control" id="id_pick_Date" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Pick Time Slot</label>
+                                    <div class="col-sm-9">
+                                        <select name="pick_Time_Slot" class="form-control" id="id_pick_Time_Slot" required>
+                                            <option value="" selected="">---------</option>
+
+                                            <option value="8-9">8am-9am</option>
+
+                                            <option value="9-10">9am-10am</option>
+
+                                            <option value="10-11">10am-11am</option>
+
+                                            <option value="11-12">11am-12pm</option>
+
+                                            <option value="12-1">12pm-1pm</option>
+
+                                            <option value="1-2">1pm-2pm</option>
+
+                                            <option value="2-3">2pm-3pm</option>
+
+                                            <option value="3-4">3pm-4pm</option>
+
+                                            <option value="4-5">4pm-5pm</option>
+
+                                            <option value="5-6">5pm-6pm</option>
+
+                                            <option value="6-7">6pm-7pm</option>
+
+                                            <option value="7-8">7pm-8pm</option>
+
+                                            <option value="8-9">8pm-9pm</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <textarea name="Description" cols="40" rows="10" placeholder="(Optional) Please add any additional comments if needed." class="form-control" id="id_Description"></textarea>
+                                    </div>
+                                </div>
+
+                                <p>Note: Appointment date/time may change based on available slots. Please visit appointment status for further information.</p>
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-9">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <a  class="btn btn-outline-danger" href="{% url 'home' %}">Cancel</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+{% endblock %}

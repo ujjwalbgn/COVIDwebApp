@@ -48,3 +48,10 @@ class AssignTreatmentForm(ModelForm):
     class Meta:
         model = AssignTreatment
         fields = '__all__'
+
+class ScheduleAppointmentForm(ModelForm):
+    class Meta:
+        model = Appointment
+        fields = '__all__'
+        widgets = {'pick_Date' : DateInput, 'Description': forms.Textarea(attrs={
+            "placeholder": "(Optional) Please add any additional comments if needed."})}

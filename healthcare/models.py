@@ -100,3 +100,24 @@ class AssignTreatment(models.Model):
     def __str__(self):
         return self.treatment.name
 
+
+class Appointment(models.Model):
+    TIME_SLOTS = [('8-9', '8am-9am'), ('9-10', '9am-10am'), ('10-11', '10am-11am'), ('11-12', '11am-12pm'),
+                              ('12-1', '12pm-1pm'), ('1-2', '1pm-2pm'), ('2-3', '2pm-3pm'), ('3-4', '3pm-4pm'),
+                              ('4-5', '4pm-5pm'), ('5-6', '5pm-6pm'), ('6-7', '6pm-7pm'), ('7-8', '7pm-8pm'),
+                              ('8-9', '8pm-9pm')]
+
+    APT_CHOICES = [('A', 'Approved'), ('D', 'Denied'), ('P', 'Pending')]
+    staff = models.ManyToManyField(User, null=True,blank=True)
+    patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
+    pick_Date = models.DateField(blank= True)
+    pick_Time_Slot = models.CharField(max_length=5, choices=TIME_SLOTS, blank=True)
+    Description = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=2, choices=APT_CHOICES,default='P')
+
+    def __str__(self):
+        if (self.patient.first_Name and self.patient.last_Name):
+            display = (self.patient.first_Name + " " + self.patient.last_Name)
+        else:
+            display = str(self.id)
+        return display
