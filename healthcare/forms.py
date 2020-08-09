@@ -55,3 +55,10 @@ class ScheduleAppointmentForm(ModelForm):
         fields = '__all__'
         widgets = {'pick_Date' : DateInput, 'Description': forms.Textarea(attrs={
             "placeholder": "(Optional) Please add any additional comments if needed."})}
+
+class PeriodicReportingForm(ModelForm):
+    class Meta:
+        model = PeriodicReporting
+        fields = '__all__'
+        widgets = {'date': DateInput}
+
