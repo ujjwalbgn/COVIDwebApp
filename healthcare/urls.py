@@ -39,5 +39,8 @@ urlpatterns = [
 
     path('deletepatient/<str:pk>/', views.DeletePatient, name="deletepatient"),
 
-    path('covidnegative', views.Covidnegative, name="Covidnegative")
+    path('covidnegative', views.Covidnegative, name="Covidnegative"),
+
+    path('scheduleappointment/', views.ScheduleAppointment, name="scheduleAppointment"),
+
 ]
