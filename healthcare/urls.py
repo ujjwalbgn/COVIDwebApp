@@ -38,4 +38,6 @@ urlpatterns = [
     path('assign_treatment/', views.assignTreatment, name="assignTreatment"),
 
     path('deletepatient/<str:pk>/', views.DeletePatient, name="deletepatient"),
+
+    path('covidnegative', views.Covidnegative, name="Covidnegative")
 ]
