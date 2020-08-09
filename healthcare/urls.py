@@ -41,6 +41,11 @@ urlpatterns = [
     path('deletemedication/<str:pk>/', views.DeleteMedication, name="deletemedication"),
     path('deletetreatment/<str:pk>/', views.DeleteTreatment, name="deletetreatment"),
 
+    path('reportsymptoms/', views.ReportSymptoms, name="reportsymptoms"),
+    path('reviewreportings/', views.reviewReportings, name="reviewreportings"),
+    path('viewreportings/<str:pk>/', views.viewReportReviewStatus, name="viewreportings"),
+
+    path('deleteSymptomsReport/<str:pk>/', views.deleteSymptomsReport, name="deleteperiodicsymptomsreport"),
 
     path('covidnegative', views.Covidnegative, name="Covidnegative"),
 

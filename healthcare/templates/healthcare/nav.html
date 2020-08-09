@@ -15,31 +15,35 @@
             <i class="fas fa-home"></i> Home </a>
         {% if user.is_authenticated %}
             <a href="{% url 'scheduleAppointment' %}" class="dash-nav-item">Appointment</a>
-    {% if not user.is_staff  %}
-        <div class="dash-nav-dropdown">
-            <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
-                <i class="fas fa-viruses"></i> Medical Record </a>
-            <div class="dash-nav-dropdown-menu">
-                <a href="{%  url 'editPatient' patient.id %}" class="dash-nav-dropdown-item dash-nav-item">
-                    View/Edit Records</a>
-            </div>
-        </div>
-    {% endif %}
-        {% if user.is_staff  %}
-            <div class="dash-nav-dropdown">
-            <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
-                <i class="fas fa-viruses"></i>Staff </a>
-            <div class="dash-nav-dropdown-menu">
-                <a href="{% url 'listPatient' %}" class="dash-nav-dropdown-item dash-nav-item">
-                    All Pateint</a>
-                <a href="{% url 'medication' %}" class="dash-nav-dropdown-item dash-nav-item">
-                    Medication</a>
-                 <a href="{% url 'treatment' %}" class="dash-nav-dropdown-item dash-nav-item">
-                    Treatment</a>
-            </div>
-        </div>
-{% endif %}
-    {% endif %}
+            {% if not user.is_staff  %}
+                <div class="dash-nav-dropdown">
+                    <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                        <i class="fas fa-viruses"></i> Medical Record </a>
+                    <div class="dash-nav-dropdown-menu">
+                        <a href="{%  url 'editPatient' patient.id %}" class="dash-nav-dropdown-item dash-nav-item">
+                            View/Edit Records</a>
+                        <a href="{%  url 'reportsymptoms' %} "class="dash-nav-dropdown-item dash-nav-item">
+                            Report Symptoms</a>
+                    </div>
+                </div>
+            {% endif %}
+            {% if user.is_staff  %}
+                <div class="dash-nav-dropdown">
+                    <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
+                        <i class="fas fa-viruses"></i>Staff </a>
+                    <div class="dash-nav-dropdown-menu">
+                        <a href="{% url 'listPatient' %}" class="dash-nav-dropdown-item dash-nav-item">
+                            All Pateint</a>
+                        <a href="{% url 'medication' %}" class="dash-nav-dropdown-item dash-nav-item">
+                            Medication</a>
+                        <a href="{% url 'treatment' %}" class="dash-nav-dropdown-item dash-nav-item">
+                            Treatment</a>
+                        <a href="{%  url 'reviewreportings' %}" class="dash-nav-dropdown-item dash-nav-item">
+                            Review Reportings</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
         <div class="dash-nav-dropdown">
             <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
                 <i class="fas fa-viruses"></i> COVID </a>

@@ -121,3 +121,31 @@ class Appointment(models.Model):
         else:
             display = str(self.id)
         return display
+
+# class ContactTracing(models.Model):
+#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+
+
+
+
+
+
+class PeriodicReporting(models.Model):
+    BOOL_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
+    OPT_CHOICES = [('Yes', 'Yes'), ('No', 'No'), ('NA', 'I do not know')]
+
+    patient = models.OneToOneField(Patient, null=True, blank=True, on_delete=models.CASCADE)
+    date = models.DateField(null=True, blank=True)
+    fever_above_100_F = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    cough = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    shortness_of_breath_or_difficulty_breathing = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    sustained_loss_of_smell_or_taste = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    body_aches = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    vomiting_or_diarrhoea = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+
+    def __str__(self):
+        if (self.patient.first_Name and self.patient.last_Name):
+            display = (self.patient.first_Name + " " + self.patient.last_Name)
+        else:
+            display = str(self.id)
+        return display
