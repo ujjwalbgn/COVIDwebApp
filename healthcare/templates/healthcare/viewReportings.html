@@ -1,0 +1,55 @@
+
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Symptoms Periodic Reporting</h1>
+                <div class="row">
+                    <div class="col-xl-10">
+                        <div class="card spur-card">
+
+                            <div class="card-header"><div class="spur-card-title">Symptoms reported date:</div></div>
+                            <div class="card-body "><p>{{ reportings.date }}</p></div>
+
+                            <div class="card-header"><div class="spur-card-title">Patient's Name:</div></div>
+                            <div class="card-body "><p>{{ reportings.patient }}</p></div>
+
+                            <div class="card-header"><div class="spur-card-title">Do you have fever or body temperature above 100 F?</div></div>
+                            <div class="card-body "><p>{{ reportings.fever_above_100_F }}</p></div>
+
+                            <div class="card-header"><div class="spur-card-title">Do you still have cough?</div></div>
+                            <div class="card-body "><p>{{ reportings.cough }}</p></div>
+
+                            <div class="card-header"><div class="spur-card-title">Are you having difficulty to breathe?</div></div>
+                            <div class="card-body "><p>{{ reportings.shortness_of_breath_or_difficulty_breathing }}</p></div>
+
+                            <div class="card-header"><div class="spur-card-title">Do you feel loss of smell or taste?</div></div>
+                            <div class="card-body "><p>{{ reportings.sustained_loss_of_smell_or_taste }}</p></div>
+
+                            <div class="card-header"><div class="spur-card-title">Do you have body aches?</div></div>
+                            <div class="card-body "><p>{{ reportings.body_aches }}</p></div>
+
+                            <div class="card-header"><div class="spur-card-title">Vomiting or diarrhoea problem?</div></div>
+                            <div class="card-body "><p>{{ reportings.vomiting_or_diarrhoea }}</p></div>
+
+                        </div>
+
+                        <div class="card spur-card">
+                            <div class="card-header"><div class="spur-card-title">Assign Medication/Treatment based on above information:</div></div>
+                            <div class="card-body ">
+                                <a href=" {% url 'editPatient' reportings.patient.id %}">Assign Medication/Treatment</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+        </div>
+
+
+    </main>
+
+{% endblock %}

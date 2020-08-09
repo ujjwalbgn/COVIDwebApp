@@ -1,0 +1,31 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Delete Report</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">Confirm to delete</div>
+                        </div>
+                        <div class="card-body ">
+
+                            <p>Are you sure you want to delete symptoms report of Patient: "{{reportings.patient}}"?
+                              Report date: {{reportings.date}} </p>
+                            <form action="{% url 'deleteperiodicsymptomsreport' reportings.id %}" method="POST">
+                                {% csrf_token %}
+                                <a class="btn btn-primary mb-1" href="{% url 'reviewreportings' %}">Cancel</a>
+                                <button type="submit" class="btn btn-danger mb-1">Yes</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

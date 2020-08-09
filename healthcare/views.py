@@ -329,3 +329,52 @@ def DeleteTreatment(request, pk):
         treatment.delete()
         return redirect('treatment')
     return render(request, "healthcare/deleteTreatment.html", context)
+
+def ReportSymptoms(request):
+    form = PeriodicReportingForm()
+
+    if request.user.is_authenticated:
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            print("Unable to find patient ID")
+            patient = None
+
+    if request.method == 'POST':
+        form = PeriodicReportingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your current symptoms report has been updated successfully! '
+                                      'Please check medication/treatment assigned for you.')
+            return redirect('home')
+        else:
+            messages.warning(request, 'Your previous report is being reviewed. '
+                                      'Please submit new report later.')
+
+    context = {'form': form, 'patient': patient}
+    return render(request, 'healthcare/symptomsReporting.html', context)
+
+@staff_only
+def reviewReportings(request):
+    reportings = PeriodicReporting.objects.all()
+
+    context = {'reportings': reportings}
+
+    return render(request, 'healthcare/listReportings.html', context)
+
+@staff_only
+def viewReportReviewStatus(request, pk):
+    form = PeriodicReportingForm()
+    reportings = PeriodicReporting.objects.get(id=pk)
+    context = {'reportings': reportings, 'form': form}
+    return render(request, 'healthcare/viewReportings.html', context)
+
+@staff_only
+def deleteSymptomsReport(request, pk):
+    reportings = PeriodicReporting.objects.get(id=pk)
+    context = {'reportings': reportings}
+    if request.method == "POST":
+        reportings.delete()
+        return redirect('reviewreportings')
+    return render(request, "healthcare/deleteSymptomsReport.html", context)
