@@ -285,3 +285,29 @@ def call911(request):
 
 def Covidnegative(request):
     return render(request, "healthcare/noCovid.html")
+
+@login_required(login_url='login')
+# @allowed_users(allowed_roles=['patient'])
+def ScheduleAppointment(request):
+    form = ScheduleAppointmentForm()
+    appointments = Appointment.objects.all()
+
+    current_user = request.user
+    try:
+        patient = Patient.objects.get(user=current_user)
+    except ObjectDoesNotExist:
+        patient = None
+
+    if request.method == 'POST':
+        form = ScheduleAppointmentForm(request.POST)
+        if form.is_valid():
+
+            form.save()
+            messages.success(request, 'Request for appointment approval has been submitted successfully')
+            return redirect('scheduleAppointment')
+
+
+
+    context = {'form': form, 'appointments': appointments,'patient':patient,
+               }
+    return render(request, 'healthcare/ScheduleAppointment.html', context)
