@@ -37,7 +37,7 @@
                             </form>
                         </div>
                     </div>
-                <div class="card spur-card">
+                    <div class="card spur-card">
                         <div class="card-header">
                             <div class="spur-card-title">List of Existing treatment</div>
                         </div>
@@ -48,6 +48,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Description</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -58,6 +59,9 @@
                                         <td>{{ treatment.name }}</td>
                                         <td>
                                             {{ treatment.description }}
+                                        </td>
+                                        <td>
+                                            <a href=" {% url 'deletetreatment' treatment.id %}">Remove</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
