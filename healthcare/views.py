@@ -226,6 +226,9 @@ def covidScreening(request):
             if(counter >= 2):
                 messages.info(request, 'According to the data you provided, we recommend COVID testing')
                 return redirect('testLocation')
+            else:
+                messages.info(request, 'Chill No COVID. ')
+                return redirect('testLocation')
 
 
     if request.user.is_authenticated:
