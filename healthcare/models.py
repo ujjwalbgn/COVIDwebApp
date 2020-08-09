@@ -108,7 +108,7 @@ class Appointment(models.Model):
                               ('8-9', '8pm-9pm')]
 
     APT_CHOICES = [('A', 'Approved'), ('D', 'Denied'), ('P', 'Pending')]
-    staff = models.ManyToManyField(User, null=True,blank=True)
+    staff =  models.CharField(max_length= 200, null= True)
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
     pick_Date = models.DateField(blank= True)
     pick_Time_Slot = models.CharField(max_length=5, choices=TIME_SLOTS, blank=True)

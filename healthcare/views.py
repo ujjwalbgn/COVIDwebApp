@@ -298,8 +298,6 @@ def ScheduleAppointment(request):
     except ObjectDoesNotExist:
         patient = None
 
-    staffs = User.objects.filter(is_staff=True)
-
     if request.method == 'POST':
         form = ScheduleAppointmentForm(request.POST)
         if form.is_valid():
@@ -311,5 +309,5 @@ def ScheduleAppointment(request):
 
 
     context = {'form': form, 'appointments': appointments,'patient':patient,
-               'staffs':staffs}
+               }
     return render(request, 'healthcare/ScheduleAppointment.html', context)
