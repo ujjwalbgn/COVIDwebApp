@@ -14,6 +14,7 @@
         <a href="{% url 'home' %}" class="dash-nav-item">
             <i class="fas fa-home"></i> Home </a>
         {% if user.is_authenticated %}
+            <a href="{% url 'scheduleAppointment' %}" class="dash-nav-item">Appointment</a>
     {% if not user.is_staff  %}
         <div class="dash-nav-dropdown">
             <a href="#!" class="dash-nav-item dash-nav-dropdown-toggle">
