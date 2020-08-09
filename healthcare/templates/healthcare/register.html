@@ -46,14 +46,15 @@
                         <a class="account-dialog-link" href="{% url 'login' %}">Already have an account?</a>
                     </div>
 
-                    {% if form.errors %}
-                        <hr/>
-                        <div class="alert alert-danger">
-                            <p>
-                                {{ form.errors }}
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            <p id="messages">
+                                {{ message }}
                             </p>
                         </div>
-                    {% endif %}
+                    {% endfor %}
+                {% endif %}
 
                 </form>
             </div>
