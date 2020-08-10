@@ -18,17 +18,22 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Patient</th>
                                     <th scope="col">Report Submitted Date</th>
-                                    <th scope="col">View Report</th>
-                                    <th scope="col">Choose to delete</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                {% for contact in contactrracings %}
+                                {% for contact in contacts %}
                                     <tr>
                                         <th scope="row"> {{ forloop.counter }}</th>
                                         <td>
                                             {{ contact.patient }}
+                                        </td>
+                                    <td>
+                                            {{ contact.date_created }}
+                                        </td>
+                                    <td>
+                                           <a href="{% url 'viewCovidTracing' contact.id %}">View Details</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

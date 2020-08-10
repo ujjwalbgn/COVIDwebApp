@@ -401,12 +401,20 @@ def ContactTracingView(request):
     return render(request, 'healthcare/symptomsReporting.html', context)
 
 @staff_only
-def listCovidTracingView(request):
+def listAllCovidTracing(request):
 
     contactrracings = ContactTracing.objects.all()
-    print(contactrracings)
     context = {'contacts': contactrracings}
     return render(request, 'healthcare/listContactTracing.html', context)
+
+
+@staff_only
+def viewCovidTracing(request, pk):
+
+    contactrracing = ContactTracing.objects.get(id = pk)
+    form = ContactTracingForm(instance=contactrracing)
+    context = {'form': form}
+    return render(request, 'healthcare/viewContactTracing.html', context)
 
 @staff_only
 def reviewReportings(request):
