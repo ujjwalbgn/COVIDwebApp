@@ -51,4 +51,6 @@ urlpatterns = [
 
     path('scheduleappointment/', views.ScheduleAppointment, name="scheduleAppointment"),
 
+    path('deleteappointment/<str:pk>/', views.deleteAppointment, name="deleteappointment"),
+
 ]

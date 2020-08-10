@@ -16,6 +16,8 @@
                             <th scope="col">Patient Name</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
+                            <th scope="col">Delete</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -27,6 +29,10 @@
                                 <td>{{ appointment.patient }}</td>
                                 <td>{{ appointment.pick_Date }}</td>
                                 <td>{{ appointment.pick_Time_Slot }}</td>
+                                <td>
+                                    <a href=" {% url 'deleteappointment' appointment.id %}">Delete</a>
+                                </td>
+
                             </tr>
                         {% endfor %}
                         </tbody>
