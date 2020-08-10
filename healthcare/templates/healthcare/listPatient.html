@@ -19,6 +19,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Age</th>
                                     <th scope="col">Gender</th>
+                                    <th scope="col">COVID</th>
                                     <th scope="col">More</th>
                                     <th scope="col">Choose to delete</th>
                                 </tr>
@@ -35,6 +36,13 @@
                                         <td>
                                             {{ patient.gender }}
                                         </td>
+                                        <th>
+                                            {% if patient.have_you_been_tested_positive_for_COVID == 'Yes' %}
+                                                Positive
+                                            {% else %}
+                                                Negative
+                                            {% endif %}
+                                        </th>
                                         <td>
                                             <a href=" {% url 'editPatient' patient.id %}" {{ patient.gender }}>View/Edit</a>
                                         </td>

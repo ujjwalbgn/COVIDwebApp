@@ -400,6 +400,13 @@ def ContactTracing(request):
     context = {'form': form, 'patient': patient}
     return render(request, 'healthcare/symptomsReporting.html', context)
 
+@staff_only
+def listcovidTracing(request):
+
+    contacts = ContactTracing.objects.all()
+    print(contacts)
+    # context = {'contacts': contacts}
+    # return render(request, 'healthcare/listContactTracing.html', context)
 
 @staff_only
 def reviewReportings(request):
@@ -408,6 +415,7 @@ def reviewReportings(request):
     context = {'reportings': reportings}
 
     return render(request, 'healthcare/listReportings.html', context)
+
 
 @staff_only
 def viewReportReviewStatus(request, pk):
