@@ -222,8 +222,6 @@ def covidScreening(request):
         form = CovidScreeningForm(request.POST)
         if form.is_valid():
 
-            # todo save to existing patient
-
             closeContactWithCovid19Patient = form.cleaned_data['have_you_been_in_contact_with_COVID19_patient']
             counter = 0
             if (closeContactWithCovid19Patient == 'Yes'):
