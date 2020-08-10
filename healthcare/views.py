@@ -411,3 +411,14 @@ def deleteSymptomsReport(request, pk):
         reportings.delete()
         return redirect('reviewreportings')
     return render(request, "healthcare/deleteSymptomsReport.html", context)
+
+
+@staff_only
+def deleteAppointment(request, pk):
+    appointments = Appointment.objects.get(id=pk)
+    context = {'appointments': appointments}
+
+    if request.method == "POST":
+        appointments.delete()
+        return redirect('scheduleAppointment')
+    return render(request, "healthcare/deleteAppointment.html", context)

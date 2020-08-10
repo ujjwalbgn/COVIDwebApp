@@ -51,5 +51,5 @@ urlpatterns = [
     path('contact_tracing/', views.ContactTracing, name="ContactTracing"),
 
     path('scheduleappointment/', views.ScheduleAppointment, name="scheduleAppointment"),
-
+    path('deleteappointment/<str:pk>/', views.deleteAppointment, name="deleteappointment"),
 ]
