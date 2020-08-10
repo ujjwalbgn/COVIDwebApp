@@ -3,12 +3,25 @@
 {% block content %}
     <main class="dash-content">
         <div class="container-fluid">
+            {%  if patient.have_you_been_tested_positive_for_COVID == 'Y' %}
+                <div class="row justify-content-md-center">
+                <div class="col-xl-12">
+                    <a href="{% url 'ContactTracing' %}" class="btn btn-danger btn-lg btn-block mb-1">
+                        Fill COVID Contact Tracing</a>
+                    <a href="{% url 'reportsymptoms' %}" class="btn btn-info btn-lg btn-block mb-1">
+                        Report Symptoms</a>
+                </div>
+            </div>
+
+                {% else %}
             <div class="row justify-content-md-center">
                 <div class="col-xl-12">
                     <a href="{% url 'covidEmergencyChech' %}" class="btn btn-secondary btn-lg btn-block mb-1">Online COVID SCREENING</a>
 
                 </div>
             </div>
+            {% endif %}
+
 {#            <div class="col-xl-8">#}
 {#                <a href="{% url 'covidScreening' %}" class="btn btn-secondary btn-lg btn-block mb-1">Online COVID SCREENING</a>#}
 {#            </div>#}

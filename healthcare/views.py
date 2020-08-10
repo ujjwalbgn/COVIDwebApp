@@ -330,6 +330,7 @@ def DeleteTreatment(request, pk):
         return redirect('treatment')
     return render(request, "healthcare/deleteTreatment.html", context)
 
+@login_required(login_url='login')
 def ReportSymptoms(request):
     form = PeriodicReportingForm()
 
@@ -344,7 +345,10 @@ def ReportSymptoms(request):
     if request.method == 'POST':
         form = PeriodicReportingForm(request.POST)
         if form.is_valid():
-            form.save()
+            stock = form.save(commit=False)
+            stock.patient = patient
+            stock.save()
+
             messages.success(request, 'Your current symptoms report has been updated successfully! '
                                       'Please check medication/treatment assigned for you.')
             return redirect('home')
@@ -354,6 +358,35 @@ def ReportSymptoms(request):
 
     context = {'form': form, 'patient': patient}
     return render(request, 'healthcare/symptomsReporting.html', context)
+
+
+@login_required(login_url='login')
+def ContactTracing(request):
+    form = ContactTracingForm()
+
+    if request.user.is_authenticated:
+        current_user = request.user
+        try:
+            patient = Patient.objects.get(user=current_user)
+        except ObjectDoesNotExist:
+            print("Unable to find patient ID")
+            patient = None
+
+    if request.method == 'POST':
+        form = ContactTracingForm(request.POST)
+        if form.is_valid():
+            stock = form.save(commit=False)
+            stock.patient = patient
+            stock.save()
+
+            messages.success(request, 'Thank you for submitting Contact Tracing Form. We appreciate you support during this Pandemic')
+            return redirect('home')
+        else:
+            messages.warning(request, 'Something wnt wrong')
+
+    context = {'form': form, 'patient': patient}
+    return render(request, 'healthcare/symptomsReporting.html', context)
+
 
 @staff_only
 def reviewReportings(request):
