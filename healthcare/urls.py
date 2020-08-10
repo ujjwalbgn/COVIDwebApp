@@ -48,6 +48,7 @@ urlpatterns = [
     path('deleteSymptomsReport/<str:pk>/', views.deleteSymptomsReport, name="deleteperiodicsymptomsreport"),
 
     path('covidnegative', views.Covidnegative, name="Covidnegative"),
+    path('contact_tracing/', views.ContactTracing, name="ContactTracing"),
 
     path('scheduleappointment/', views.ScheduleAppointment, name="scheduleAppointment"),
 
