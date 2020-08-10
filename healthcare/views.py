@@ -374,7 +374,7 @@ def ReportSymptoms(request):
 
 
 @login_required(login_url='login')
-def ContactTracing(request):
+def ContactTracingView(request):
     form = ContactTracingForm()
 
     if request.user.is_authenticated:
@@ -401,12 +401,12 @@ def ContactTracing(request):
     return render(request, 'healthcare/symptomsReporting.html', context)
 
 @staff_only
-def listcovidTracing(request):
+def listCovidTracingView(request):
 
-    contacts = ContactTracing.objects.all()
-    print(contacts)
-    # context = {'contacts': contacts}
-    # return render(request, 'healthcare/listContactTracing.html', context)
+    contactrracings = ContactTracing.objects.all()
+    print(contactrracings)
+    context = {'contacts': contactrracings}
+    return render(request, 'healthcare/listContactTracing.html', context)
 
 @staff_only
 def reviewReportings(request):
