@@ -3,7 +3,7 @@
 {% block content %}
     <main class="dash-content">
         <div class="container-fluid">
-            {%  if patient.have_you_been_tested_positive_for_COVID == 'Y' %}
+            {%  if patient.have_you_been_tested_positive_for_COVID == 'Yes' %}
                 <div class="row justify-content-md-center">
                 <div class="col-xl-12">
                     <a href="{% url 'ContactTracing' %}" class="btn btn-danger btn-lg btn-block mb-1">
@@ -64,7 +64,7 @@
                                 <thead>
                                 <tr>
 
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Locations</th>
                                     <th scope="col">Confirmed Cases</th>
                                     <th scope="col">Deaths</th>
                                 </tr>
