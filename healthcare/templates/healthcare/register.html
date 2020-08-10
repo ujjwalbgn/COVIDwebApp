@@ -17,49 +17,43 @@
 
 <body>
 {% load myfilters %}
-    <div class="form-screen">
-        <div class="card account-dialog">
-            <div class="card-header bg-primary text-white"> Register </div>
-            <div class="card-body">
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Username" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password1" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password2" placeholder="Validate Password" required>
-                    </div>
-                    <div class="account-dialog-actions">
-                        <button type="submit" class="btn btn-primary">Sign Up</button>
-                        <a class="account-dialog-link" href="{% url 'login' %}">Already have an account?</a>
-                    </div>
-
-                    {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            <p id="messages">
-                                {{ message }}
-                            </p>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-
-                </form>
-            </div>
+<div class="form-screen">
+    <div class="card account-dialog">
+        <div class="card-header bg-primary text-white"> Register </div>
+        <div class="card-body">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password1" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password2" placeholder="Validate Password" required>
+                </div>
+                <div class="account-dialog-actions">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                    <a class="account-dialog-link" href="{% url 'login' %}">Already have an account?</a>
+                </div>
+            </form>
+            {% if form.errors %}
+                <div class="alert-danger">
+                    {{ form.errors }}
+                </div>
+            {% endif %}
         </div>
     </div>
+</div>
 
 
 
