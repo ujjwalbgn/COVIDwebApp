@@ -341,22 +341,37 @@ def ReportSymptoms(request):
         except ObjectDoesNotExist:
             print("Unable to find patient ID")
             patient = None
+    context = {'form': form, 'patient': patient}
+
 
     if request.method == 'POST':
+        counter = 0
         form = PeriodicReportingForm(request.POST)
         if form.is_valid():
-            stock = form.save(commit=False)
-            stock.patient = patient
-            stock.save()
+            for field in form.fields:
+                userInput = form.cleaned_data[field]
+                if(userInput == 'Yes'):
+                    counter = counter + 1
+            if(counter >= 2):
+                stock = form.save(commit=False)
+                stock.patient = patient
+                stock.flag = 'Yes'
+                stock.save()
+                messages.info(request, 'Your information is recorded. According to the data you provided, we recommend contacting Healthcare Professionals')
+                return redirect('home')
+            else:
+                stock = form.save(commit=False)
+                stock.patient = patient
+                stock.flag = 'No'
+                stock.save()
+                messages.info(request, 'Your information is recorded. ')
+                return redirect('home')
 
-            messages.success(request, 'Your current symptoms report has been updated successfully! '
-                                      'Please check medication/treatment assigned for you.')
-            return redirect('home')
         else:
             messages.warning(request, 'Your previous report is being reviewed. '
                                       'Please submit new report later.')
 
-    context = {'form': form, 'patient': patient}
+
     return render(request, 'healthcare/symptomsReporting.html', context)
 
 

@@ -27,7 +27,11 @@
                                 {% for reporting in reportings %}
                                     <tr>
                                         <th scope="row"> {{ forloop.counter }}</th>
-                                        <td>{{ reporting.patient }}</td>
+                                        <td>
+                                            <div {% if reporting.flag == 'Yes'%} class="p-3 mb-2 bg-danger text-dark" {% endif %}>
+                                                {{ reporting.patient }}
+                                            </div>
+                                        </td>
                                         <td>{{ reporting.date }}</td>
                                         <td>
                                             <a href=" {% url 'viewreportings' reporting.id %}">View Report</a>

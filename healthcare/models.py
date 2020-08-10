@@ -161,6 +161,7 @@ class PeriodicReporting(models.Model):
     sustained_loss_of_smell_or_taste = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
     body_aches = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
     vomiting_or_diarrhoea = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    flag = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
 
     def __str__(self):
         if (self.patient.first_Name and self.patient.last_Name):
