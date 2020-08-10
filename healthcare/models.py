@@ -153,7 +153,7 @@ class PeriodicReporting(models.Model):
     BOOL_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
     OPT_CHOICES = [('Yes', 'Yes'), ('No', 'No'), ('NA', 'I do not know')]
 
-    patient = models.OneToOneField(Patient, null=True, blank=True, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, null=True, blank=True, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add = True)
     fever_above_100_F = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
     cough = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
@@ -161,6 +161,7 @@ class PeriodicReporting(models.Model):
     sustained_loss_of_smell_or_taste = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
     body_aches = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
     vomiting_or_diarrhoea = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    flag = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
 
     def __str__(self):
         if (self.patient.first_Name and self.patient.last_Name):
