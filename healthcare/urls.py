@@ -49,6 +49,7 @@ urlpatterns = [
 
     path('covidnegative', views.Covidnegative, name="Covidnegative"),
     path('contact_tracing/', views.ContactTracing, name="ContactTracing"),
+    path('list_tracing/', views.listcovidTracing, name="list_tracing"),
 
     path('scheduleappointment/', views.ScheduleAppointment, name="scheduleAppointment"),
     path('deleteappointment/<str:pk>/', views.deleteAppointment, name="deleteappointment"),
