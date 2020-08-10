@@ -48,8 +48,8 @@ urlpatterns = [
     path('deleteSymptomsReport/<str:pk>/', views.deleteSymptomsReport, name="deleteperiodicsymptomsreport"),
 
     path('covidnegative', views.Covidnegative, name="Covidnegative"),
-    path('contact_tracing/', views.ContactTracing, name="ContactTracing"),
-    path('list_tracing/', views.listcovidTracing, name="list_tracing"),
+    path('contact_tracing/', views.ContactTracingView, name="ContactTracing"),
+    path('list_tracing/', views.listCovidTracingView, name="listCovidTracing"),
 
     path('scheduleappointment/', views.ScheduleAppointment, name="scheduleAppointment"),
     path('deleteappointment/<str:pk>/', views.deleteAppointment, name="deleteappointment"),
