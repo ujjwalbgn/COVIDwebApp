@@ -130,7 +130,7 @@ class Appointment(models.Model):
 
 class ContactTracing(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    # date_created = models.DateField(auto_now_add=True)
+    date_created = models.DateField(auto_now_add=True)
     full_name_of_person_1 = models.CharField(max_length= 200, null= True, blank=True)
     contact_information_of_person_1 = models.CharField(max_length= 200, null= True, blank=True)
     full_name_of_person_2 = models.CharField(max_length=200, null=True, blank=True)
