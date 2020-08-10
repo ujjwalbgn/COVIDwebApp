@@ -65,23 +65,7 @@ class PeriodicReportingForm(ModelForm):
 
 class ContactTracingForm(ModelForm):
 
-    # def __init__(self, *args, **kwargs):
-    #     # first call parent's constructor
-    #     super(ContactTracingForm, self).__init__(*args, **kwargs)
-    #     # there's a `fields` property now
-    #     self.fields['full_name_of_person_2','contact_information_of_person_2',].required = False
-
     class Meta:
         model = ContactTracing
         fields = '__all__'
         exclude = ['patient']
-
-    # 'full_name_of_person_2', 'contact_information_of_person_2',
-    # 'full_name_of_person_3', 'contact_information_of_person_3',
-    # 'full_name_of_person_4', 'contact_information_of_person_4',
-    # 'full_name_of_person_5', 'contact_information_of_person_5',
-    # 'full_name_of_person_6', 'contact_information_of_person_6',
-    # 'public_places_visited_1',
-    # 'public_places_visited_2',
-    # 'public_places_visited_3',
-    # 'public_places_visited_4',
