@@ -226,12 +226,12 @@ def covidScreening(request):
 
             closeContactWithCovid19Patient = form.cleaned_data['have_you_been_in_contact_with_COVID19_patient']
             counter = 0
-            if (closeContactWithCovid19Patient == 'Y'):
+            if (closeContactWithCovid19Patient == 'Yes'):
                 messages.info(request, 'According to the data you provided, we recommend COVID testing')
                 return redirect('testLocation')
             for field in form.fields:
                 userInput = form.cleaned_data[field]
-                if(userInput == 'Y'):
+                if(userInput == 'Yes'):
                     counter = counter + 1
             if(counter >= 2):
                 messages.info(request, 'According to the data you provided, we recommend COVID testing')

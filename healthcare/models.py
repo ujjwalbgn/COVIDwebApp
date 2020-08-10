@@ -4,8 +4,8 @@ from django.db import models
 
 # Create your models here.
 class Patient(models.Model):
-    GENDER_CHOICES = [('M', 'Male'), ('F', 'Female'), ('O', 'Other'),('NA', 'I do not wish to say')]
-    BOOL_CHOICES = [('Y', 'Yes'), ('N', 'No')]
+    GENDER_CHOICES = [('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other'), ('NA', 'I do not wish to say')]
+    BOOL_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
 
     user = models.OneToOneField(User, null=True,blank=True, on_delete=models.CASCADE)
     first_Name = models.CharField(max_length= 200, null= True)
@@ -15,9 +15,9 @@ class Patient(models.Model):
     address = models.CharField(max_length=500, null= True)
     date_created = models.DateField(auto_now_add = True)
 
-    birth_date = models.DateField(blank= True,null=True)
+    birth_date = models.DateField(blank= True, null=True)
     age = models.DecimalField(decimal_places=0, max_digits=50, null=True)
-    gender = models.CharField(max_length=2, choices=GENDER_CHOICES, blank= True)
+    gender = models.CharField(max_length=50, choices=GENDER_CHOICES, blank= True)
     height = models.CharField(max_length=10, default='0.00 ft')
     weight = models.CharField(max_length=10, default='0.00 lbs')
     allergies = models.CharField(max_length=200, null=True)
@@ -28,7 +28,7 @@ class Patient(models.Model):
     diagnosis = models.TextField(blank=True, null=True)
     pre_existing_conditions = models.TextField(blank=True, null=True)
     lab_reports = models.TextField(blank=True, null=True)
-    have_you_been_tested_positive_for_COVID = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
+    have_you_been_tested_positive_for_COVID = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
 
 
     def __str__(self):
@@ -49,19 +49,19 @@ class TestLocation(models.Model):
 
 
 class CovidScreening(models.Model):
-    BOOL_CHOICES = [('Y', 'Yes'), ('N', 'No')]
-    OPT_CHOICES = [('Y', 'Yes'), ('N', 'No'),('NA', 'I do not know')]
+    BOOL_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
+    OPT_CHOICES = [('Yes', 'Yes'), ('No', 'No'),('NA', 'I do not know')]
 
     patient = models.OneToOneField(Patient, null=True,blank=True, on_delete=models.CASCADE)
     age = models.DecimalField(decimal_places=0, max_digits=50, null=True)
-    fever_above_100_F = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
-    cough = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
-    shortness_of_breath_or_difficulty_breathing = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
-    sustained_loss_of_smell_or_taste = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
-    body_aches = models.CharField(max_length=2, choices=BOOL_CHOICES,null=True)
-    vomiting_or_diarrhoea = models.CharField(max_length=2, choices=BOOL_CHOICES, null=True)
-    have_you_been_in_contact_with_COVID19_patient = models.CharField(max_length=2, choices=OPT_CHOICES, null=True)
-    have_you_been_to_any_COVID_affected_regions = models.CharField(max_length=2, choices=OPT_CHOICES, null=True)
+    fever_above_100_F = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    cough = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    shortness_of_breath_or_difficulty_breathing = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    sustained_loss_of_smell_or_taste = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    body_aches = models.CharField(max_length=5, choices=BOOL_CHOICES,null=True)
+    vomiting_or_diarrhoea = models.CharField(max_length=5, choices=BOOL_CHOICES, null=True)
+    have_you_been_in_contact_with_COVID19_patient = models.CharField(max_length=50, choices=OPT_CHOICES, null=True)
+    have_you_been_to_any_COVID_affected_regions = models.CharField(max_length=50, choices=OPT_CHOICES, null=True)
 
     def __str__(self):
         if (self.patient.first_Name and self.patient.last_Name):
@@ -113,13 +113,13 @@ class Appointment(models.Model):
                   ('3pm-4pm', '3pm-4pm'), ('4pm-5pm', '4pm-5pm'), ('5pm-6pm', '5pm-6pm'), ('6pm-7pm', '6pm-7pm'),
                   ('7pm-8pm', '7pm-8pm'), ('8pm-9pm', '8pm-9pm')]
 
-    APT_CHOICES = [('A', 'Approved'), ('D', 'Denied'), ('P', 'Pending')]
+    APT_CHOICES = [('Approved', 'Approved'), ('Denied', 'Denied'), ('Pending', 'Pending')]
     staff =  models.CharField(max_length= 200, null= True)
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
     pick_Date = models.DateField(blank= True)
     pick_Time_Slot = models.CharField(max_length=10, choices=TIME_SLOTS, blank=True)
     Description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=2, choices=APT_CHOICES,default='P')
+    status = models.CharField(max_length=10, choices=APT_CHOICES,default='Pending')
 
     def __str__(self):
         if (self.patient.first_Name and self.patient.last_Name):
@@ -155,12 +155,12 @@ class PeriodicReporting(models.Model):
 
     patient = models.OneToOneField(Patient, null=True, blank=True, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add = True)
-    fever_above_100_F = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
-    cough = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
-    shortness_of_breath_or_difficulty_breathing = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
-    sustained_loss_of_smell_or_taste = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
-    body_aches = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
-    vomiting_or_diarrhoea = models.CharField(max_length=3, choices=BOOL_CHOICES, null=True)
+    fever_above_100_F = models.CharField(max_length=5, choices=BOOL_CHOICES, null=True)
+    cough = models.CharField(max_length=5, choices=BOOL_CHOICES, null=True)
+    shortness_of_breath_or_difficulty_breathing = models.CharField(max_length=5, choices=BOOL_CHOICES, null=True)
+    sustained_loss_of_smell_or_taste = models.CharField(max_length=5, choices=BOOL_CHOICES, null=True)
+    body_aches = models.CharField(max_length=5, choices=BOOL_CHOICES, null=True)
+    vomiting_or_diarrhoea = models.CharField(max_length=5, choices=BOOL_CHOICES, null=True)
 
     def __str__(self):
         if (self.patient.first_Name and self.patient.last_Name):
