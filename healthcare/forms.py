@@ -60,7 +60,7 @@ class PeriodicReportingForm(ModelForm):
     class Meta:
         model = PeriodicReporting
         fields = '__all__'
-        exclude = ['date', 'patient']
+        exclude = ['date', 'patient', "flag"]
 
 
 class ContactTracingForm(ModelForm):
