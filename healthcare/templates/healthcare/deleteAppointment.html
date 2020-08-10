@@ -1,0 +1,30 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Delete Appointment</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">Confirm to delete</div>
+                        </div>
+                        <div class="card-body ">
+
+                            <p>Are you sure you want to delete appointment for patient: "{{appointments.patient}} on {{ appointments.pick_Date }} at {{ appointments.pick_Time_Slot }}"  ?</p>
+                            <form action="{% url 'deleteappointment' appointments.id %}" method="POST">
+                                {% csrf_token %}
+                                <a class="btn btn-primary mb-1" href="{% url 'scheduleAppointment' %}">Cancel</a>
+                                <button type="submit" class="btn btn-danger mb-1">Yes</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
