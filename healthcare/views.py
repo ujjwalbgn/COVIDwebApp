@@ -417,6 +417,15 @@ def viewCovidTracing(request, pk):
     return render(request, 'healthcare/viewContactTracing.html', context)
 
 @staff_only
+def deleteCovidTracing(request, pk):
+    contact = ContactTracing.objects.get(id=pk)
+    context = {'contact': contact}
+    if request.method == "POST":
+        contact.delete()
+        return redirect('listCovidTracing')
+    return render(request, "healthcare/deleteCovidTracing.html", context)
+
+@staff_only
 def reviewReportings(request):
     reportings = PeriodicReporting.objects.all()
 

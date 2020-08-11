@@ -19,6 +19,7 @@
                                     <th scope="col">Patient</th>
                                     <th scope="col">Report Submitted Date</th>
                                     <th scope="col">Action</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,6 +35,9 @@
                                         </td>
                                     <td>
                                            <a href="{% url 'viewCovidTracing' contact.id %}">View Details</a>
+                                        </td>
+                                    <td>
+                                           <a href="{% url 'deletecovidtracing' contact.id %}">Delete</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

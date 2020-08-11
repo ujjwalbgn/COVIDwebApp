@@ -1,0 +1,28 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">Delete Close Contacts Record</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">Confirm to delete</div>
+                        </div>
+                        <div class="card-body ">
+                            <p>Are you sure you want to delete close contacts info of patient: "{{contact.patient}}" ?</p>
+                            <form action="{% url 'deletecovidtracing' contact.id %}" method="POST">
+                                {% csrf_token %}
+                                <a class="btn btn-primary mb-1" href="{% url 'listCovidTracing' %}">Cancel</a>
+                                <button type="submit" class="btn btn-danger mb-1">Yes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
