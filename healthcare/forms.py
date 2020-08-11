@@ -53,8 +53,10 @@ class ScheduleAppointmentForm(ModelForm):
     class Meta:
         model = Appointment
         fields = '__all__'
-        widgets = {'pick_Date' : DateInput, 'Description': forms.Textarea(attrs={
-            "placeholder": "(Optional) Please add any additional comments if needed."})}
+        widgets = {'pick_Date' : DateInput}
+        exclude = ['patient','status']
+
+
 
 class PeriodicReportingForm(ModelForm):
     class Meta:

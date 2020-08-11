@@ -113,8 +113,11 @@ class Appointment(models.Model):
                   ('3pm-4pm', '3pm-4pm'), ('4pm-5pm', '4pm-5pm'), ('5pm-6pm', '5pm-6pm'), ('6pm-7pm', '6pm-7pm'),
                   ('7pm-8pm', '7pm-8pm'), ('8pm-9pm', '8pm-9pm')]
 
+    STAFF_LIST = [('Dr. Ross Green','Dr. Ross Green'),('Dr. Janice Bing','Dr. Janice Bing'),
+                  ('Dr. Joey Tribbiani','Dr. Joey Tribbiani') ,('Dr. Drake Ramorayn','Dr. Drake Ramorayn'),
+                  ('Dr. Emilie Geller','Dr. Emilie Geller')]
     APT_CHOICES = [('Approved', 'Approved'), ('Denied', 'Denied'), ('Pending', 'Pending')]
-    staff =  models.CharField(max_length= 200, null= True)
+    staff =  models.CharField(max_length= 200, choices=STAFF_LIST, null= True)
     patient = models.ForeignKey(Patient,on_delete=models.CASCADE)
     pick_Date = models.DateField(blank= True)
     pick_Time_Slot = models.CharField(max_length=10, choices=TIME_SLOTS, blank=True)
