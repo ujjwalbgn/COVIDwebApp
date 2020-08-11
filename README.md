@@ -23,5 +23,15 @@ By default, the configuration uses SQLite, so migrate models to database follow 
  * For Healthcare providers assign them to 'staff' group in order to grant them access to Patient Details
  
  
-          
+### Enable Forget you password
+To enable forget you password edit SMTP Configuration inside COVIDwebApp/settings.py           
 
+```
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '___your_email_host__'
+EMAIL_PORT = '__port_number__'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = '__username__'
+EMAIL_HOST_PASSWORD = '__password__'
+
+```
