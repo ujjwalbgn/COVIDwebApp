@@ -1,5 +1,6 @@
 ## COVIDwebApp 
 This is CSE3310 UTA project 
+For live demo visit [https://cse3310.herokuapp.com/](https://cse3310.herokuapp.com/)
 
 ### Getting Started
 Before you start make sure you have the Python 3.8 or higher installed in you operating system.<br/>
@@ -13,7 +14,7 @@ Before you start make sure you have the Python 3.8 or higher installed in you op
 
 ### Running the Application
 By default, the configuration uses SQLite, so migrate models to database follow the steps listed below: <br/>
- * Make sure with in the repo for COVIDwebApp, now run ```python COVIDwebApp\manage.py makemigrations``` followed by ```python COVIDwebApp\manage.py migrate```
+ * Make sure within the repo for COVIDwebApp, now run ```python COVIDwebApp\manage.py makemigrations``` followed by ```python COVIDwebApp\manage.py migrate```
  * Now the Database is set, so to create a superuser run ```python COVIDwebApp\manage.py createsuperuser```
     *System wil prompt you for username, email and password
  * You can now login to backend of th application at ```http://127.0.0.1:8000/admin/``` 
@@ -23,7 +24,7 @@ By default, the configuration uses SQLite, so migrate models to database follow 
  * For Healthcare providers assign them to 'staff' group in order to grant them access to Patient Details
  
  
-### Enable Forget you password
+### Enable Forget password
 To enable forget you password edit SMTP Configuration inside COVIDwebApp/settings.py           
 
 ```
@@ -35,3 +36,15 @@ EMAIL_HOST_USER = '__username__'
 EMAIL_HOST_PASSWORD = '__password__'
 
 ```
+
+### Contributors
+Alisha Kunwar <br/>
+Pranay Shakya <br/>
+Ujjwal Bajagain <br/>
+Vivek Kumar Yadav <br/>
+
+### Shout out to 
+    Front End Template = https://github.com/HackerThemes/spur-template
+    
+    
+    
