@@ -1,22 +1,27 @@
 ## COVIDwebApp 
 This is CSE3310 UTA project (#COVIDwebApp)
 
-#### Before you start writing code : ALWAYS do ``` git pull  ``` <br />
+###Getting Started
+Before you start make sure you have the Python 3.8 or higher installed in you operating system.<br/>
 
-If you are working on a new feature or adding something new do switch to a different branch:  <br />
-    command to create a different branch : ``` git branch BRANCHNAME``` <br />
-    command to switch to different branch: ``` git checkout BRANCHNAME``` <br />
-    <br />
-When done with making edits please push it to github: <br />
-    command to add changed ``` git add . ``` <br />
-    command to commit changes : ``` git commit -m "WRITE A SHORT INFO ABOUT WHAT YOU CHANGES OR MADE"```   <br />
-    command to push to github : ``` git push``` <br />
-    
-After the push, switch back to master using ```git checkout master``` 
+###Initial Setup 
+* Clone the COVIDwebApp repo:
+    * To clone the repo run ```git clone https://github.com/ujjwalbgn/COVIDwebApp ```
+* Navigate into the repository  ```cd COVIDwebApp```
+* Install all the requirements listed in requirements.txt using ```pip install requirements.txt ```      
 
-Other Helpful commands:
-    To check current status in git : ```git status```
-    To list all branches : ```git branch```
-    To delete old branch : ``` git branch BRANCH NAME -D```
-           
+
+###Running the Application
+By default, the configuration uses SQLite, so migrate models to database follow the steps listed below: <br/>
+ * Make sure with in the repo for COVIDwebApp, now run ```python COVIDwebApp\manage.py makemigrations``` followed by ```python COVIDwebApp\manage.py migrate```
+ * Now the Database is set, so to create a superuser run ```python COVIDwebApp\manage.py createsuperuser```
+    *System wil prompt you for username, email and password
+ * You can now login to backend of th application at ```http://127.0.0.1:8000/admin/``` 
+    * After logging as Super User create two user groups 'staff' and 'patient'.
+    * Assign the Super User to the staff group. 
+ * Now all new users who register will be marked as 'patient'
+ * For Healthcare providers assign them to 'staff' group in order to grant them access to Patient Details
+ 
+ 
+          
 
