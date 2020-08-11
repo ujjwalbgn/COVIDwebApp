@@ -11,4 +11,6 @@ admin.site.register(AssignMed)
 admin.site.register(AssignTreatment)
 admin.site.register(Appointment)
 admin.site.register(PeriodicReporting)
+admin.site.register(ContactTracing)
+
 

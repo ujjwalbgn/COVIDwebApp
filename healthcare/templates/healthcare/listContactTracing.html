@@ -1,0 +1,49 @@
+{% extends 'healthcare/main.html' %}
+
+{% block content %}
+    {% load myfilters %}
+    <main class="dash-content">
+        <div class="container-fluid">
+            <h1 class="dash-title">COVID Contact Tracing</h1>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-title">List of Patient who submitted COVID Contact Tracing</div>
+                        </div>
+                        <div class="card-body ">
+                            <table class="table table-hover table-in-card">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Patient</th>
+                                    <th scope="col">Report Submitted Date</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for contact in contacts %}
+                                    <tr>
+                                        <th scope="row"> {{ forloop.counter }}</th>
+                                        <td>
+                                            {{ contact.patient }}
+                                        </td>
+                                    <td>
+                                            {{ contact.date_created }}
+                                        </td>
+                                    <td>
+                                           <a href="{% url 'viewCovidTracing' contact.id %}">View Details</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
