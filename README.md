@@ -1,17 +1,17 @@
 ## COVIDwebApp 
 This is CSE3310 UTA project (#COVIDwebApp)
 
-###Getting Started
+### Getting Started
 Before you start make sure you have the Python 3.8 or higher installed in you operating system.<br/>
 
-###Initial Setup 
+### Initial Setup 
 * Clone the COVIDwebApp repo:
     * To clone the repo run ```git clone https://github.com/ujjwalbgn/COVIDwebApp ```
 * Navigate into the repository  ```cd COVIDwebApp```
 * Install all the requirements listed in requirements.txt using ```pip install requirements.txt ```      
 
 
-###Running the Application
+### Running the Application
 By default, the configuration uses SQLite, so migrate models to database follow the steps listed below: <br/>
  * Make sure with in the repo for COVIDwebApp, now run ```python COVIDwebApp\manage.py makemigrations``` followed by ```python COVIDwebApp\manage.py migrate```
  * Now the Database is set, so to create a superuser run ```python COVIDwebApp\manage.py createsuperuser```
