@@ -1,5 +1,5 @@
 ## COVIDwebApp 
-This is CSE3310 UTA project (#COVIDwebApp)
+This is CSE3310 UTA project 
 
 ### Getting Started
 Before you start make sure you have the Python 3.8 or higher installed in you operating system.<br/>
