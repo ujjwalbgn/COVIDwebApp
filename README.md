@@ -44,7 +44,7 @@ Ujjwal Bajagain <br/>
 Vivek Kumar Yadav <br/>
 
 ### Shout out to 
-    Front End Template = https://github.com/HackerThemes/spur-template
+    Front End Template : https://github.com/HackerThemes/spur-template
     
     
     
