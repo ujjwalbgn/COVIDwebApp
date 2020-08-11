@@ -13,81 +13,21 @@
                                 <div class="spur-card-title">Choose appointment dates/times.</div>
                             </div>
                             <div class="card-body ">
-
                                 <form method="POST" action="">
                                     {% csrf_token %}
-                                    <input type="hidden" id="patient" name="patient" value="{{patient.id }}">
-                                    <input type="hidden" id="status" name="status" value="P">
 
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Staff</label>
-                                        <div class="col-sm-9">
-                                            <select name="staff" class="form-control" id="id_staff" required >
-                                                <option value="Dr. Ross Green">Dr. Ross Green</option>
-                                                <option value="Dr. Janice Bing">Dr. Janice Bing</option>
-                                                <option value="Dr. Joey Tribbiani">Dr. Joey Tribbiani</option>
-                                                <option value="Dr. Drake Ramorayn">Dr. Drake Ramorayn</option>
-                                                <option value="Dr. Emilie Geller">Dr. Emilie Geller</option>
-                                            </select>
+                                    {%  for field  in form %}
+                                        <div class="form-group row">
+                                            <label  class="col-sm-2 col-form-label">{{ field.label }}</label>
+                                            <div class="col-sm-9">
+                                                {{ field | addclass:'form-control'}}
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Pick Date</label>
-                                        <div class="col-sm-9">
-                                            <input type="date" name="pick_Date" class="form-control" id="id_pick_Date" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Pick Time Slot</label>
-                                        <div class="col-sm-9">
-                                            <select name="pick_Time_Slot" class="form-control" id="id_pick_Time_Slot" required>
-                                                <option value="" selected="">---------</option>
-
-                                                <option value="8am-9am">8am-9am</option>
-
-                                                <option value="9am-10am">9am-10am</option>
-
-                                                <option value="10am-11am">10am-11am</option>
-
-                                                <option value="11am-12pm">11am-12pm</option>
-
-                                                <option value="12pm-1pm">12pm-1pm</option>
-
-                                                <option value="1pm-2pm">1pm-2pm</option>
-
-                                                <option value="2pm-3pm">2pm-3pm</option>
-
-                                                <option value="3pm-4pm">3pm-4pm</option>
-
-                                                <option value="4pm-5pm">4pm-5pm</option>
-
-                                                <option value="5pm-6pm">5pm-6pm</option>
-
-                                                <option value="6pm-7pm">6pm-7pm</option>
-
-                                                <option value="7pm-8pm">7pm-8pm</option>
-
-                                                <option value="8pm-9pm">8pm-9pm</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Description</label>
-                                        <div class="col-sm-9">
-                                            <textarea name="Description" cols="40" rows="10" placeholder="(Optional) Please add any additional comments if needed." class="form-control" id="id_Description"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <p>Note: Appointment date/time may change based on available slots.</p>
-
+                                    {% endfor %}
                                     <div class="form-group row">
                                         <div class="col-sm-9">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <a  class="btn btn-outline-danger" href="{% url 'home' %}">Cancel</a>
+                                            <a  class="btn btn-outline-danger" href="{% url 'editPatient' patient.id %}">Cancel</a>
                                         </div>
                                     </div>
                                 </form>

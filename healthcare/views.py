@@ -299,11 +299,11 @@ def ScheduleAppointment(request):
     if request.method == 'POST':
         form = ScheduleAppointmentForm(request.POST)
         if form.is_valid():
-
-            form.save()
+            stock = form.save(commit=False)
+            stock.patient = patient
+            stock.save()
             messages.success(request, 'Request for appointment approval has been submitted successfully')
             return redirect('scheduleAppointment')
-
 
 
     context = {'form': form, 'appointments': appointments,'patient':patient,
